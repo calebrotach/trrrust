@@ -376,7 +376,7 @@
         let app;
         let db;
         let auth;
-        const API_KEY = ""; 
+        const API_KEY = "AIzaSyAWagOnlC5jbJmH3Bu0gaM42bFjxqcHb8w"; 
         const API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=";
 
         // Firebase Setup (Mandatory environment initialization)
