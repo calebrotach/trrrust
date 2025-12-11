@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusts: The Financial Chameleon</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- 
+        PALETTE: Future Finance / Electric Night
+        Background: #0f172a (Slate 900)
+        Card BG: #1e293b (Slate 800)
+        Text Main: #f8fafc (Slate 50)
+        Text Muted: #94a3b8 (Slate 400)
+        Accent 1 (Blue): #3b82f6
+        Accent 2 (Cyan): #06b6d4
+        Accent 3 (Purple): #8b5cf6
+        Accent 4 (Pink): #ec4899
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+
+        /* Chart Container Standards */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Max width constraint */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height */
+            max-height: 400px;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <!-- 
+        HTML COMMENT: Source Material Analysis & Plan
+        1. Definition: Explained via Grantor/Trustee/Beneficiary model.
+        2. Types: Compared Revocable vs Irrevocable.
+        3. Hedge Funds: Clarified LP vs Trust structure.
+        4. Demographics: Visualized wealth gap in usage.
+        5. Barriers: Visualized survey data on why people avoid them.
+        6. Alts: Visualized the shift to real estate/crypto and custody issues.
+        7. LLM Tools: Added two Gemini features (Definition Generator, Grounded Regulatory Search).
+        
+        NO SVG USED. NO MERMAID JS USED.
+        Visualizations:
+        - Chart.js (Bar, Doughnut, Radar, Mixed)
+        - CSS/HTML Diagrams (Flowcharts)
+    -->
+</head>
+<body class="antialiased selection:bg-cyan-500 selection:text-white">
+
+    <!-- Navigation / Header -->
+    <nav class="sticky top-0 z-50 bg-[#0f172a]/90 backdrop-blur-md border-b border-slate-800 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-extrabold tracking-tight"><span class="text-blue-500">TRUST</span><span class="text-cyan-400">METRICS</span></span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#anatomy" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Anatomy</a>
+                        <a href="#adoption" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Adoption</a>
+                        <a href="#assets" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Alt Assets</a>
+                        <a href="#tools" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">LLM Tools</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="text-center">
+                <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
+                    Demystifying <span class="gradient-text">Trusts</span>
+                </h1>
+                <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
+                    Trusts are not just for the ultra-wealthy. They are the "chameleons" of finance—adaptable legal structures designed to protect assets, bypass probate, and manage tax liability.
+                </p>
+                <div class="mt-8 flex justify-center gap-4">
+                    <div class="bg-slate-800 p-4 rounded-lg shadow-lg border border-slate-700 text-center w-32">
+                        <div class="text-3xl font-bold text-blue-500">$5T+</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Assets in US Trusts</div>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg shadow-lg border border-slate-700 text-center w-32">
+                        <div class="text-3xl font-bold text-cyan-400">2%</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">US Adults with a Trust</div>
+                    </div>
+                    <div class="bg-slate-800 p-4 rounded-lg shadow-lg border border-slate-700 text-center w-32">
+                        <div class="text-3xl font-bold text-purple-500">40%</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wide">Growth in Alt Assets</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1: The Anatomy of a Trust -->
+    <section id="anatomy" class="py-12 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">1. The DNA of Every Trust</h2>
+                <p class="text-slate-400 text-lg">
+                    Regardless of complexity, every trust shares the same tripartite structure. Think of it as a <strong class="text-blue-400">safety deposit box</strong> where one person puts items in, another holds the key, and a third gets to use the contents according to a rulebook.
+                </p>
+            </div>
+
+            <!-- CSS Diagram: The Trust Triangle -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden min-h-[400px] flex flex-col justify-center">
+                    <!-- Grantor -->
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-blue-600/20 border border-blue-500 p-4 rounded-xl text-center w-48 z-10">
+                            <h3 class="font-bold text-blue-400">The Grantor</h3>
+                            <p class="text-xs text-slate-300">Creator & Funder</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-between items-center w-full px-2 md:px-12 relative">
+                        <!-- Connecting Lines (CSS) -->
+                        <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 -z-0 transform -translate-y-1/2"></div>
+                        
+                        <!-- Trustee -->
+                        <div class="bg-purple-600/20 border border-purple-500 p-4 rounded-xl text-center w-40 z-10 bg-[#0f172a]">
+                            <h3 class="font-bold text-purple-400">The Trustee</h3>
+                            <p class="text-xs text-slate-300">Manager & Fiduciary</p>
+                        </div>
+
+                        <!-- Beneficiary -->
+                        <div class="bg-cyan-600/20 border border-cyan-500 p-4 rounded-xl text-center w-40 z-10 bg-[#0f172a]">
+                            <h3 class="font-bold text-cyan-400">The Beneficiary</h3>
+                            <p class="text-xs text-slate-300">Recipient</p>
+                        </div>
+                    </div>
+
+                    <!-- Assets Flow -->
+                    <div class="mt-8 text-center">
+                        <div class="inline-block bg-slate-700 px-4 py-2 rounded-full text-xs text-slate-300 border border-slate-600">
+                            &darr; The Trust Agreement (The Rulebook) &darr;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-blue-500">
+                        <h3 class="text-lg font-bold text-white">Who Holds the Power?</h3>
+                        <p class="text-slate-400 text-sm mt-2">
+                            Unlike a simple bank account, legal title to assets is split. The <strong>Trustee</strong> holds <em>legal title</em> (responsibility), while the <strong>Beneficiary</strong> holds <em>equitable title</em> (enjoyment).
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-purple-500">
+                        <h3 class="text-lg font-bold text-white">The Hedge Fund Confusion</h3>
+                        <p class="text-slate-400 text-sm mt-2">
+                            <strong>Are Hedge Funds Trusts?</strong> Usually, no. In the US, most are <em>Limited Partnerships (LPs)</em> or LLCs. However, "Unit Trusts" are common in the UK/Australia for mutual funds.
+                        </p>
+                    </div>
+                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-cyan-500">
+                        <h3 class="text-lg font-bold text-white">Governance Boards</h3>
+                        <p class="text-slate-400 text-sm mt-2">
+                            <strong>REITs vs. Banks:</strong> Public REITs act like corporations with a Board of Directors. Bank Trust Departments are heavily regulated by the OCC/Fed, adhering to strict fiduciary standards unlike a standard LLC manager.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Flavors & Adoption -->
+    <section id="adoption" class="py-12 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">2. Usage & The Wealth Gap</h2>
+                <p class="text-slate-400 text-lg">
+                    Trusts are powerful tools for privacy and probate avoidance, yet they remain underutilized by the middle class. Why? Perceived complexity and cost create a massive barrier to entry.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Chart: Trust Adoption by Net Worth -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-white mb-2">Trust Usage by Net Worth</h3>
+                    <p class="text-sm text-slate-400 mb-6">Percentage of households utilizing trust structures.</p>
+                    <div class="chart-container">
+                        <canvas id="adoptionChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-xs text-slate-500 italic">Data simulated based on estate planning industry reports.</p>
+                </div>
+
+                <!-- Chart: Barriers to Entry -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-white mb-2">Why Don't More People Use Them?</h3>
+                    <p class="text-sm text-slate-400 mb-6">Top reasons cited by individuals with >$500k assets.</p>
+                    <div class="chart-container">
+                        <canvas id="barriersChart"></canvas>
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2 text-xs text-slate-400">
+                        <div class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span>Misconception ("Rich Only")</div>
+                        <div class="flex items-center"><span class="w-2 h-2 rounded-full bg-cyan-400 mr-2"></span>Legal Costs</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Asset Mix & Alternatives -->
+    <section id="assets" class="py-12 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">3. The Asset Evolution</h2>
+                <p class="text-slate-400 text-lg">
+                    Traditionally, trusts held boring mixes of stocks and municipal bonds. Today, <strong>Self-Directed Trusts</strong> are aggressively moving into alternative assets. This shift presents massive regulatory hurdles regarding custody and valuation.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- Chart: Traditional vs Modern Portfolio -->
+                <div class="lg:col-span-2 glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-white mb-2">Portfolio Shift: Traditional vs. Modern Trust</h3>
+                    <p class="text-sm text-slate-400 mb-6">The modern trust is diversifying away from public equities into "Hard" and "Digital" assets.</p>
+                    <div class="chart-container" style="max-width: 100%;">
+                        <canvas id="portfolioChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Qualitative: The Difficulty of Alts -->
+                <div class="glass-panel p-6 rounded-xl flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-4">Why is it Hard?</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="bg-red-500/20 p-2 rounded mr-3 mt-1">
+                                    <span class="text-red-400 font-bold">!</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-200">Custody & Control</h4>
+                                    <p class="text-sm text-slate-400">If a trust owns Bitcoin, who holds the private keys? Institutional custody is required for compliance, but expensive.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-yellow-500/20 p-2 rounded mr-3 mt-1">
+                                    <span class="text-yellow-400 font-bold">!</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-200">Liquidity Events</h4>
+                                    <p class="text-sm text-slate-400">You can't sell 1/10th of a commercial building to pay a beneficiary. Alts create cash-flow jams.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="bg-blue-500/20 p-2 rounded mr-3 mt-1">
+                                    <span class="text-blue-400 font-bold">!</span>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-200">Valuation (IRS 401)</h4>
+                                    <p class="text-sm text-slate-400">Private Equity and Art don't have a daily ticker price. Annual appraisals are costly but mandatory.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 pt-6 border-t border-slate-700">
+                        <h4 class="text-sm font-bold text-cyan-400 uppercase tracking-wider mb-2">Most Desired Alts</h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-slate-700 rounded-full text-xs text-white">Private Equity</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full text-xs text-white">Multi-Family Real Estate</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full text-xs text-white">Crypto/DeFi</span>
+                            <span class="px-3 py-1 bg-slate-700 rounded-full text-xs text-white">Farmland</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Gemini LLM Tools -->
+    <section id="tools" class="py-12 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">4. Trust Analyst Tools ✨</h2>
+                <p class="text-slate-400 text-lg">
+                    Leverage Generative AI to quickly summarize complex trust concepts or find the latest regulatory information impacting alternative assets.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Tool 1: Trust Definition Generator -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-blue-400 mb-4">✨ Explain a Trust Type</h3>
+                    <p class="text-sm text-slate-400 mb-4">Input any trust name (e.g., GRAT, Irrevocable Life Insurance Trust) and get a concise breakdown.</p>
+                    <div class="space-y-4">
+                        <input type="text" id="trustInput" placeholder="e.g., Charitable Remainder Trust" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white placeholder-slate-500 focus:ring-blue-500 focus:border-blue-500 border border-slate-600">
+                        <button id="generateDefinitionBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition duration-200">
+                            Generate Definition ✨
+                        </button>
+                        <div id="definitionLoading" class="hidden text-cyan-400 text-sm text-center">Analyzing request...</div>
+                        <div id="definitionOutput" class="p-4 bg-slate-800 rounded-lg border border-slate-700 min-h-[100px] text-sm whitespace-pre-wrap">
+                            <p class="text-slate-500 italic">Definition will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tool 2: Regulatory Update Analyzer (Grounded) -->
+                <div class="glass-panel p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-cyan-400 mb-4">✨ Alt Asset Regulatory Insight</h3>
+                    <p class="text-sm text-slate-400 mb-4">Get a grounded summary of the latest regulatory changes affecting alternative assets in trusts.</p>
+                    <div class="space-y-4">
+                        <input type="text" id="regulatoryInput" placeholder="e.g., SEC guidance on crypto custody in trusts" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white placeholder-slate-500 focus:ring-cyan-500 focus:border-cyan-500 border border-slate-600">
+                        <button id="generateRegulatoryBtn" class="w-full bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-2 rounded-lg transition duration-200">
+                            Get Latest Update (Web Grounded) ✨
+                        </button>
+                        <div id="regulatoryLoading" class="hidden text-blue-400 text-sm text-center">Searching the web for updates...</div>
+                        <div id="regulatoryOutput" class="p-4 bg-slate-800 rounded-lg border border-slate-700 min-h-[100px] text-sm whitespace-pre-wrap">
+                            <p class="text-slate-500 italic">Latest regulatory summary will appear here, with sources.</p>
+                        </div>
+                        <div id="regulatorySources" class="mt-2 text-xs text-slate-500"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-[#0f172a] border-t border-slate-800 py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-slate-500 text-sm">&copy; 2023 TrustMetrics Analytics. For educational purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- Chart Logic and LLM Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        let app;
+        let db;
+        let auth;
+        const API_KEY = ""; 
+        const API_URL_BASE = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=";
+
+        // Firebase Setup (Mandatory environment initialization)
+        const initFirebase = async () => {
+            try {
+                const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Firebase initialization or sign-in failed:", error);
+            }
+        };
+
+        initFirebase();
+
+        // LLM Core Function with Exponential Backoff
+        const callGeminiApi = async (userQuery, systemPrompt = "", useSearch = false, maxRetries = 5) => {
+            const url = `${API_URL_BASE}${API_KEY}`;
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] },
+                tools: useSearch ? [{ "google_search": {} }] : undefined
+            };
+
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429) {
+                        const delay = Math.pow(2, i) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        throw new Error(`API call failed with status: ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const text = candidate.content.parts[0].text;
+                        
+                        let sources = [];
+                        const groundingMetadata = candidate.groundingMetadata;
+                        if (groundingMetadata && groundingMetadata.groundingAttributions) {
+                            sources = groundingMetadata.groundingAttributions
+                                .map(attribution => ({
+                                    uri: attribution.web?.uri,
+                                    title: attribution.web?.title,
+                                }))
+                                .filter(source => source.uri && source.title);
+                        }
+
+                        return { text, sources };
+                    } else {
+                        throw new Error("Invalid response structure from Gemini API.");
+                    }
+                } catch (error) {
+                    if (i === maxRetries - 1) throw error;
+                }
+            }
+        };
+
+        // LLM Feature 1: Trust Definition Generator
+        const generateTrustDefinition = async () => {
+            const input = document.getElementById('trustInput').value.trim();
+            const outputElement = document.getElementById('definitionOutput');
+            const loadingElement = document.getElementById('definitionLoading');
+            
+            if (!input) {
+                outputElement.innerHTML = `<p class="text-red-400 italic">Please enter a trust name to explain.</p>`;
+                return;
+            }
+
+            loadingElement.classList.remove('hidden');
+            outputElement.innerHTML = `<p class="text-slate-500 italic">Thinking...</p>`;
+
+            const systemPrompt = "You are a world-class fiduciary and financial educator. Summarize the user-provided trust type. Your response must be in three distinct sections: Purpose (What it does), Key Features (e.g., revocable/irrevocable, tax implications), and Use Case (Who uses it). Use simple, professional language.";
+            const userQuery = `Explain the following trust type: ${input}`;
+
+            try {
+                const result = await callGeminiApi(userQuery, systemPrompt, false);
+                outputElement.innerText = result.text;
+            } catch (error) {
+                console.error("Gemini Definition Error:", error);
+                outputElement.innerHTML = `<p class="text-red-400 italic">Error generating definition. Please check the console for details.</p>`;
+            } finally {
+                loadingElement.classList.add('hidden');
+            }
+        };
+
+        // LLM Feature 2: Regulatory Update Analyzer (Grounded)
+        const generateRegulatoryUpdate = async () => {
+            const input = document.getElementById('regulatoryInput').value.trim();
+            const outputElement = document.getElementById('regulatoryOutput');
+            const sourcesElement = document.getElementById('regulatorySources');
+            const loadingElement = document.getElementById('regulatoryLoading');
+
+            if (!input) {
+                outputElement.innerHTML = `<p class="text-red-400 italic">Please enter a specific regulatory topic to search.</p>`;
+                return;
+            }
+
+            loadingElement.classList.remove('hidden');
+            outputElement.innerHTML = `<p class="text-slate-500 italic">Searching for the latest regulatory updates on ${input}...</p>`;
+            sourcesElement.innerHTML = '';
+
+            const systemPrompt = "You are a financial compliance officer. Search for the latest regulatory guidance or changes (last 12 months) related to the user's query concerning trusts and alternative assets. Provide a concise, bulleted summary of the key findings. Only use information provided by the search results.";
+            const userQuery = `Find and summarize recent regulatory updates regarding: ${input}`;
+
+            try {
+                const result = await callGeminiApi(userQuery, systemPrompt, true);
+                outputElement.innerText = result.text;
+
+                if (result.sources.length > 0) {
+                    sourcesElement.innerHTML = `<strong>Sources:</strong> ${result.sources.map(s => `<a href="${s.uri}" target="_blank" class="text-blue-400 hover:text-blue-300 underline">${s.title}</a>`).join(' | ')}`;
+                } else {
+                    sourcesElement.innerHTML = `<p class="text-slate-500 italic">No specific web sources cited.</p>`;
+                }
+            } catch (error) {
+                console.error("Gemini Grounded Search Error:", error);
+                outputElement.innerHTML = `<p class="text-red-400 italic">Error retrieving regulatory update. Please check the console for details.</p>`;
+            } finally {
+                loadingElement.classList.add('hidden');
+            }
+        };
+        
+        // Event Listeners for LLM tools
+        document.getElementById('generateDefinitionBtn').addEventListener('click', generateTrustDefinition);
+        document.getElementById('generateRegulatoryBtn').addEventListener('click', generateRegulatoryUpdate);
+
+
+        // ----------------------------------------------------
+        // Existing Chart Logic (Kept for Infographic Functionality)
+        // ----------------------------------------------------
+
+        // Global defaults for dark theme
+        Chart.defaults.color = '#94a3b8';
+        Chart.defaults.font.family = 'Inter';
+        Chart.defaults.scale.grid.color = 'rgba(148, 163, 184, 0.1)';
+
+        // Label Wrapping Utility
+        function wrapLabel(str, maxChars) {
+            if (str.length <= maxChars) return str;
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + 1 + words[i].length <= maxChars) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        // 1. Adoption Chart (Bar)
+        const ctxAdoption = document.getElementById('adoptionChart').getContext('2d');
+        new Chart(ctxAdoption, {
+            type: 'bar',
+            data: {
+                labels: ['Under $100k', '$100k - $1M', '$1M - $5M', '$5M - $20M', 'Ultra HNW ($20M+)'],
+                datasets: [{
+                    label: 'Trust Utilization Rate (%)',
+                    data: [2, 8, 28, 65, 92],
+                    backgroundColor: [
+                        '#1e293b',
+                        '#334155', 
+                        '#3b82f6',
+                        '#60a5fa', 
+                        '#06b6d4'
+                    ],
+                    borderRadius: 6,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                let label = context[0].label;
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: { display: true, text: 'Utilization %' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2. Barriers Chart (Donut)
+        const ctxBarriers = document.getElementById('barriersChart').getContext('2d');
+        const barrierLabels = [
+            "Perceived as 'Rich Only'", 
+            "Setup & Legal Costs", 
+            "Complexity/Confusion", 
+            "Loss of Control Fears", 
+            "Procrastination"
+        ];
+        // Wrap labels
+        const wrappedBarrierLabels = barrierLabels.map(l => wrapLabel(l, 16));
+
+        new Chart(ctxBarriers, {
+            type: 'doughnut',
+            data: {
+                labels: wrappedBarrierLabels,
+                datasets: [{
+                    data: [42, 25, 18, 10, 5],
+                    backgroundColor: [
+                        '#3b82f6',
+                        '#06b6d4',
+                        '#8b5cf6',
+                        '#ec4899',
+                        '#64748b'
+                    ],
+                    borderWidth: 0,
+                    hoverOffset: 10
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'right',
+                        labels: {
+                            color: '#cbd5e1',
+                            font: { size: 10 }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                let label = context[0].chart.data.labels[context[0].dataIndex];
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // 3. Portfolio Shift (Horizontal Stacked Bar)
+        const ctxPortfolio = document.getElementById('portfolioChart').getContext('2d');
+        new Chart(ctxPortfolio, {
+            type: 'bar',
+            data: {
+                labels: ['Traditional Trust', 'Modern/Alt Trust'],
+                datasets: [
+                    {
+                        label: 'Public Equities',
+                        data: [60, 35],
+                        backgroundColor: '#3b82f6',
+                        barThickness: 40
+                    },
+                    {
+                        label: 'Bonds/Cash',
+                        data: [35, 15],
+                        backgroundColor: '#64748b',
+                        barThickness: 40
+                    },
+                    {
+                        label: 'Real Estate',
+                        data: [5, 30],
+                        backgroundColor: '#06b6d4',
+                        barThickness: 40
+                    },
+                    {
+                        label: 'Private Equity/Crypto',
+                        data: [0, 20],
+                        backgroundColor: '#8b5cf6',
+                        barThickness: 40
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true,
+                        max: 100,
+                        title: { display: true, text: 'Asset Allocation %' }
+                    },
+                    y: {
+                        stacked: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(context) {
+                                let label = context[0].label;
+                                return Array.isArray(label) ? label.join(' ') : label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
