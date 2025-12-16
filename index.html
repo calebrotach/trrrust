@@ -371,6 +371,202 @@
                 </p>
             </div>
 
+            <!-- Module Glossary -->
+            <div class="glass-panel p-6 rounded-xl mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-white">Module Glossary</h3>
+                    <button id="glossaryToggle" class="text-sm text-blue-400 hover:text-blue-300 transition" onclick="toggleGlossary()">
+                        <span id="glossaryToggleText">Show</span> Definitions
+                    </button>
+                </div>
+                <div id="glossaryContent" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Revocability -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-400 mb-2">Revocability</h4>
+                            <p class="text-sm text-slate-300 mb-3">Determines whether the grantor can modify or terminate the trust after creation.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Revocable:</span>
+                                    <span class="text-slate-400"> Grantor can modify, amend, or revoke the trust at any time. Assets remain in grantor's estate for tax purposes.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust - allows flexibility during lifetime</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Irrevocable:</span>
+                                    <span class="text-slate-400"> Trust cannot be modified or revoked once established. Assets removed from grantor's estate.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT, GRAT - provides tax benefits but sacrifices control</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tax Treatment -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-bold text-purple-400 mb-2">Tax Treatment</h4>
+                            <p class="text-sm text-slate-300 mb-3">Tax strategies and benefits the trust provides.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Estate Tax Reduction:</span>
+                                    <span class="text-slate-400"> Removes assets from taxable estate, reducing estate tax liability.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Bypass Trust - shields assets from estate tax</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Income Tax Planning:</span>
+                                    <span class="text-slate-400"> Optimizes income tax treatment, often through grantor trust status.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: IDGT - grantor pays taxes, trust grows tax-free</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Gift Tax Exclusion:</span>
+                                    <span class="text-slate-400"> Utilizes annual gift tax exclusion ($18,000+ per recipient) or lifetime exemption.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Crummey Trust - leverages annual exclusion gifts</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Generation-Skipping:</span>
+                                    <span class="text-slate-400"> Transfers assets to grandchildren or later generations, skipping estate tax on children.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GST Trust, Dynasty Trust - multi-generational planning</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Deduction:</span>
+                                    <span class="text-slate-400"> Provides income tax deduction for charitable contributions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - immediate tax deduction for charitable giving</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Primary Purpose -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-cyan-500">
+                            <h4 class="font-bold text-cyan-400 mb-2">Primary Purpose</h4>
+                            <p class="text-sm text-slate-300 mb-3">The main objective or goal the trust is designed to achieve.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Estate Planning:</span>
+                                    <span class="text-slate-400"> Avoids probate, manages asset distribution, minimizes taxes.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust, QTIP Trust - core estate planning tools</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Asset Protection:</span>
+                                    <span class="text-slate-400"> Shields assets from creditors, lawsuits, or beneficiary mismanagement.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Asset Protection Trust, Spendthrift Trust - creditor protection</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Giving:</span>
+                                    <span class="text-slate-400"> Facilitates charitable donations with tax benefits.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - structured charitable giving</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Business Succession:</span>
+                                    <span class="text-slate-400"> Transfers business interests to next generation efficiently.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Business Succession Trust - smooth business transition</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Special Needs:</span>
+                                    <span class="text-slate-400"> Preserves government benefits eligibility while providing supplemental support.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Special Needs Trust - maintains SSI/Medicaid eligibility</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Life Insurance Planning:</span>
+                                    <span class="text-slate-400"> Removes life insurance from estate, provides tax-free death benefit.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT - estate tax-free insurance proceeds</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Control Structure -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-pink-500">
+                            <h4 class="font-bold text-pink-400 mb-2">Control Structure</h4>
+                            <p class="text-sm text-slate-300 mb-3">Who has decision-making authority over trust assets and distributions.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Grantor Retains Control:</span>
+                                    <span class="text-slate-400"> Grantor maintains significant control, often as trustee or with retained powers.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust, QPRT - grantor manages assets</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Trustee Discretion:</span>
+                                    <span class="text-slate-400"> Trustee has broad discretion over distributions and investments.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Asset Protection Trust - trustee decides distributions</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Beneficiary Control:</span>
+                                    <span class="text-slate-400"> Beneficiaries have direct control or significant influence over trust decisions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Some self-directed trusts - beneficiary investment control</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Limited Control:</span>
+                                    <span class="text-slate-400"> Control is restricted by trust terms, often for protection or tax reasons.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Special Needs Trust - limited to preserve benefits</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Distribution Method -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-emerald-500">
+                            <h4 class="font-bold text-emerald-400 mb-2">Distribution Method</h4>
+                            <p class="text-sm text-slate-300 mb-3">How and when trust assets are distributed to beneficiaries.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Income Only:</span>
+                                    <span class="text-slate-400"> Beneficiaries receive only income generated by trust assets, not principal.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: QTIP Trust, Bypass Trust - income stream to spouse</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Principal Access:</span>
+                                    <span class="text-slate-400"> Beneficiaries can access both income and principal, often with restrictions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust - full access during lifetime</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Discretionary:</span>
+                                    <span class="text-slate-400"> Trustee decides when and how much to distribute based on beneficiary needs.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Asset Protection Trust - flexible distributions</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Mandatory:</span>
+                                    <span class="text-slate-400"> Trust requires specific distributions at set intervals or events.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GRAT - fixed annuity payments, Pet Trust - care funding</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Remainder:</span>
+                                    <span class="text-slate-400"> Assets ultimately go to charity after providing income to beneficiaries.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - remainder interest to charity</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Special Features -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="font-bold text-yellow-400 mb-2">Special Features</h4>
+                            <p class="text-sm text-slate-300 mb-3">Unique characteristics or asset types that define the trust's structure.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Life Insurance:</span>
+                                    <span class="text-slate-400"> Trust is funded with or designed to hold life insurance policies.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT - removes insurance from estate</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Real Estate:</span>
+                                    <span class="text-slate-400"> Trust holds real property, often with specific transfer or privacy benefits.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: QPRT, Land Trust, DST - real estate holding structures</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Business Interests:</span>
+                                    <span class="text-slate-400"> Trust holds business equity, facilitating succession planning.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Business Succession Trust - transfers business ownership</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Medicaid Planning:</span>
+                                    <span class="text-slate-400"> Designed to qualify for Medicaid while preserving assets for heirs.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Medicaid Asset Protection Trust - 5-year lookback planning</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Generation-Skipping:</span>
+                                    <span class="text-slate-400"> Transfers assets to grandchildren or later generations, skipping children's estate.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GST Trust, Dynasty Trust - multi-generational transfers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Search and Filter Controls -->
             <div class="glass-panel p-6 rounded-xl mb-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
@@ -1315,6 +1511,19 @@
 
         // Make filterByModule available globally
         window.filterByModule = filterByModule;
+
+        // Glossary toggle function
+        window.toggleGlossary = function() {
+            const content = document.getElementById('glossaryContent');
+            const toggleText = document.getElementById('glossaryToggleText');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggleText.textContent = 'Hide';
+            } else {
+                content.classList.add('hidden');
+                toggleText.textContent = 'Show';
+            }
+        };
 
         // Comparison functionality
         let comparisonTrusts = [];
