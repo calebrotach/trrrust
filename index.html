@@ -101,6 +101,7 @@
                         <a href="#adoption" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Adoption</a>
                         <a href="#assets" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Alt Assets</a>
                         <a href="#tools" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">LLM Tools</a>
+                        <a href="#example" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Example</a>
                         <a href="#trust-types" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Trust Types</a>
                     </div>
                 </div>
@@ -361,14 +362,258 @@
         </div>
     </section>
 
-    <!-- Section 5: Comprehensive Trust Types Database -->
-    <section id="trust-types" class="py-12 bg-slate-900">
+    <!-- Section 5: Trust Example - Visual Diagram -->
+    <section id="example" class="py-12 bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
-                <h2 class="text-3xl font-bold text-white mb-4">5. Trust Types: Modular Analysis</h2>
+                <h2 class="text-3xl font-bold text-white mb-4">5. Trust in Action: ILIT Example</h2>
+                <p class="text-slate-400 text-lg">
+                    See how all the pieces fit together in a real-world example. This diagram shows an <strong class="text-blue-400">Irrevocable Life Insurance Trust (ILIT)</strong> and how each component interacts.
+                </p>
+            </div>
+
+            <!-- Trust Type Selector -->
+            <div class="glass-panel p-6 rounded-xl mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-300 mb-2">Select Trust Example:</label>
+                        <select id="trustExampleSelect" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:ring-blue-500 focus:border-blue-500">
+                            <option value="ilit">Irrevocable Life Insurance Trust (ILIT)</option>
+                            <option value="revocable">Revocable Living Trust</option>
+                            <option value="grat">Grantor Retained Annuity Trust (GRAT)</option>
+                            <option value="crt">Charitable Remainder Trust (CRT)</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2">
+                        <p id="trustDescription" class="text-slate-300 text-sm leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Trust Diagram -->
+            <div class="glass-panel p-8 rounded-xl relative overflow-hidden" id="trustDiagram">
+                <!-- Diagram will be rendered here by JavaScript -->
+            </div>
+
+            <!-- Module Breakdown -->
+            <div class="mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="moduleBreakdown">
+                <!-- Module cards will be populated by JavaScript -->
+            </div>
+
+            <!-- Flow Explanation -->
+            <div class="mt-8 glass-panel p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-white mb-4">How It Works: Step-by-Step</h3>
+                <div id="flowExplanation" class="space-y-4">
+                    <!-- Flow steps will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 6: Comprehensive Trust Types Database -->
+    <section id="trust-types" class="py-12 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">6. Trust Types: Modular Analysis</h2>
                 <p class="text-slate-400 text-lg">
                     Every trust is built from modular components. Search by trust name or filter by modules to understand shared characteristics and differences across trust types.
                 </p>
+            </div>
+
+            <!-- Module Glossary -->
+            <div class="glass-panel p-6 rounded-xl mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-white">Module Glossary</h3>
+                    <button id="glossaryToggle" class="text-sm text-blue-400 hover:text-blue-300 transition" onclick="toggleGlossary()">
+                        <span id="glossaryToggleText">Show</span> Definitions
+                    </button>
+                </div>
+                <div id="glossaryContent" class="hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Revocability -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 class="font-bold text-blue-400 mb-2">Revocability</h4>
+                            <p class="text-sm text-slate-300 mb-3">Determines whether the grantor can modify or terminate the trust after creation.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Revocable:</span>
+                                    <span class="text-slate-400"> Grantor can modify, amend, or revoke the trust at any time. Assets remain in grantor's estate for tax purposes.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust - allows flexibility during lifetime</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Irrevocable:</span>
+                                    <span class="text-slate-400"> Trust cannot be modified or revoked once established. Assets removed from grantor's estate.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT, GRAT - provides tax benefits but sacrifices control</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tax Treatment -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-purple-500">
+                            <h4 class="font-bold text-purple-400 mb-2">Tax Treatment</h4>
+                            <p class="text-sm text-slate-300 mb-3">Tax strategies and benefits the trust provides.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Estate Tax Reduction:</span>
+                                    <span class="text-slate-400"> Removes assets from taxable estate, reducing estate tax liability.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Bypass Trust - shields assets from estate tax</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Income Tax Planning:</span>
+                                    <span class="text-slate-400"> Optimizes income tax treatment, often through grantor trust status.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: IDGT - grantor pays taxes, trust grows tax-free</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Gift Tax Exclusion:</span>
+                                    <span class="text-slate-400"> Utilizes annual gift tax exclusion ($18,000+ per recipient) or lifetime exemption.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Crummey Trust - leverages annual exclusion gifts</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Generation-Skipping:</span>
+                                    <span class="text-slate-400"> Transfers assets to grandchildren or later generations, skipping estate tax on children.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GST Trust, Dynasty Trust - multi-generational planning</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Deduction:</span>
+                                    <span class="text-slate-400"> Provides income tax deduction for charitable contributions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - immediate tax deduction for charitable giving</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Primary Purpose -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-cyan-500">
+                            <h4 class="font-bold text-cyan-400 mb-2">Primary Purpose</h4>
+                            <p class="text-sm text-slate-300 mb-3">The main objective or goal the trust is designed to achieve.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Estate Planning:</span>
+                                    <span class="text-slate-400"> Avoids probate, manages asset distribution, minimizes taxes.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust, QTIP Trust - core estate planning tools</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Asset Protection:</span>
+                                    <span class="text-slate-400"> Shields assets from creditors, lawsuits, or beneficiary mismanagement.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Asset Protection Trust, Spendthrift Trust - creditor protection</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Giving:</span>
+                                    <span class="text-slate-400"> Facilitates charitable donations with tax benefits.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - structured charitable giving</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Business Succession:</span>
+                                    <span class="text-slate-400"> Transfers business interests to next generation efficiently.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Business Succession Trust - smooth business transition</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Special Needs:</span>
+                                    <span class="text-slate-400"> Preserves government benefits eligibility while providing supplemental support.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Special Needs Trust - maintains SSI/Medicaid eligibility</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Life Insurance Planning:</span>
+                                    <span class="text-slate-400"> Removes life insurance from estate, provides tax-free death benefit.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT - estate tax-free insurance proceeds</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Control Structure -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-pink-500">
+                            <h4 class="font-bold text-pink-400 mb-2">Control Structure</h4>
+                            <p class="text-sm text-slate-300 mb-3">Who has decision-making authority over trust assets and distributions.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Grantor Retains Control:</span>
+                                    <span class="text-slate-400"> Grantor maintains significant control, often as trustee or with retained powers.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust, QPRT - grantor manages assets</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Trustee Discretion:</span>
+                                    <span class="text-slate-400"> Trustee has broad discretion over distributions and investments.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Asset Protection Trust - trustee decides distributions</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Beneficiary Control:</span>
+                                    <span class="text-slate-400"> Beneficiaries have direct control or significant influence over trust decisions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Some self-directed trusts - beneficiary investment control</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Limited Control:</span>
+                                    <span class="text-slate-400"> Control is restricted by trust terms, often for protection or tax reasons.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Special Needs Trust - limited to preserve benefits</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Distribution Method -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-emerald-500">
+                            <h4 class="font-bold text-emerald-400 mb-2">Distribution Method</h4>
+                            <p class="text-sm text-slate-300 mb-3">How and when trust assets are distributed to beneficiaries.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Income Only:</span>
+                                    <span class="text-slate-400"> Beneficiaries receive only income generated by trust assets, not principal.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: QTIP Trust, Bypass Trust - income stream to spouse</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Principal Access:</span>
+                                    <span class="text-slate-400"> Beneficiaries can access both income and principal, often with restrictions.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Revocable Living Trust - full access during lifetime</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Discretionary:</span>
+                                    <span class="text-slate-400"> Trustee decides when and how much to distribute based on beneficiary needs.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Dynasty Trust, Asset Protection Trust - flexible distributions</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Mandatory:</span>
+                                    <span class="text-slate-400"> Trust requires specific distributions at set intervals or events.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GRAT - fixed annuity payments, Pet Trust - care funding</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Charitable Remainder:</span>
+                                    <span class="text-slate-400"> Assets ultimately go to charity after providing income to beneficiaries.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: CRT, CLT - remainder interest to charity</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Special Features -->
+                        <div class="bg-slate-800 p-4 rounded-lg border-l-4 border-yellow-500">
+                            <h4 class="font-bold text-yellow-400 mb-2">Special Features</h4>
+                            <p class="text-sm text-slate-300 mb-3">Unique characteristics or asset types that define the trust's structure.</p>
+                            <div class="space-y-2 text-xs">
+                                <div>
+                                    <span class="font-semibold text-slate-200">Life Insurance:</span>
+                                    <span class="text-slate-400"> Trust is funded with or designed to hold life insurance policies.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: ILIT - removes insurance from estate</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Real Estate:</span>
+                                    <span class="text-slate-400"> Trust holds real property, often with specific transfer or privacy benefits.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: QPRT, Land Trust, DST - real estate holding structures</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Business Interests:</span>
+                                    <span class="text-slate-400"> Trust holds business equity, facilitating succession planning.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Business Succession Trust - transfers business ownership</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Medicaid Planning:</span>
+                                    <span class="text-slate-400"> Designed to qualify for Medicaid while preserving assets for heirs.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: Medicaid Asset Protection Trust - 5-year lookback planning</div>
+                                </div>
+                                <div>
+                                    <span class="font-semibold text-slate-200">Generation-Skipping:</span>
+                                    <span class="text-slate-400"> Transfers assets to grandchildren or later generations, skipping children's estate.</span>
+                                    <div class="mt-1 text-slate-500 italic">Example: GST Trust, Dynasty Trust - multi-generational transfers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Search and Filter Controls -->
@@ -757,6 +1002,378 @@
                         }
                     }
                 }
+            }
+        });
+
+        // ----------------------------------------------------
+        // Trust Example Diagram
+        // ----------------------------------------------------
+
+        const TRUST_EXAMPLES = {
+            ilit: {
+                name: 'Irrevocable Life Insurance Trust (ILIT)',
+                description: 'Removes life insurance from estate while providing tax-free death benefit to beneficiaries.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates trust', 'Funds with gifts', 'Pays gift tax on premiums'],
+                    assets: ['$50,000 annual gifts', 'Life Insurance Policy']
+                },
+                trustee: {
+                    name: 'Sarah (Trustee)',
+                    actions: ['Manages trust', 'Pays insurance premiums', 'Distributes to beneficiaries'],
+                    powers: ['Investment decisions', 'Distribution discretion']
+                },
+                beneficiary: {
+                    name: 'Children (Beneficiaries)',
+                    receives: ['Tax-free death benefit', 'Discretionary distributions'],
+                    timing: 'After grantor\'s death'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Crummey withdrawal rights', 'Spendthrift provisions'],
+                    taxBenefits: ['Estate tax exclusion', 'Gift tax annual exclusion']
+                },
+                flow: [
+                    { step: 1, title: 'Trust Creation', description: 'Grantor creates irrevocable trust and names trustee and beneficiaries.' },
+                    { step: 2, title: 'Funding', description: 'Grantor makes annual gifts to trust (up to $18,000 per beneficiary, indexed).' },
+                    { step: 3, title: 'Crummey Notice', description: 'Beneficiaries receive withdrawal rights notice (typically 30-60 days).' },
+                    { step: 4, title: 'Premium Payment', description: 'Trustee uses trust funds to pay life insurance premiums.' },
+                    { step: 5, title: 'Policy Ownership', description: 'Trust owns the policy, removing it from grantor\'s estate.' },
+                    { step: 6, title: 'Death Benefit', description: 'Upon grantor\'s death, insurance pays tax-free to trust.' },
+                    { step: 7, title: 'Distribution', description: 'Trustee distributes proceeds to beneficiaries per trust terms.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Gift Tax Exclusion'],
+                    primaryPurpose: ['Life Insurance Planning', 'Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: ['Life Insurance']
+                }
+            },
+            revocable: {
+                name: 'Revocable Living Trust',
+                description: 'Avoids probate while maintaining full control during lifetime.',
+                grantor: {
+                    name: 'John (Grantor/Trustee)',
+                    actions: ['Creates trust', 'Transfers assets', 'Manages investments', 'Can revoke anytime'],
+                    assets: ['Home', 'Investment accounts', 'Bank accounts']
+                },
+                trustee: {
+                    name: 'John (Same as Grantor)',
+                    actions: ['Manages all assets', 'Makes distributions', 'Can modify trust'],
+                    powers: ['Full control', 'Can be own trustee']
+                },
+                beneficiary: {
+                    name: 'Spouse & Children',
+                    receives: ['Income during lifetime', 'Assets after death'],
+                    timing: 'During lifetime and after death'
+                },
+                trustAgreement: {
+                    terms: ['Revocable', 'Grantor as trustee', 'Pour-over will backup'],
+                    taxBenefits: ['No estate tax benefit', 'Avoids probate']
+                },
+                flow: [
+                    { step: 1, title: 'Trust Creation', description: 'Grantor creates revocable trust and names successor trustee.' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets (home, accounts) into trust name.' },
+                    { step: 3, title: 'Lifetime Management', description: 'Grantor manages trust assets as trustee, retains full control.' },
+                    { step: 4, title: 'Modification Rights', description: 'Grantor can modify, amend, or revoke trust at any time.' },
+                    { step: 5, title: 'Incapacity', description: 'If grantor becomes incapacitated, successor trustee takes over.' },
+                    { step: 6, title: 'Death', description: 'Upon death, assets pass to beneficiaries without probate.' },
+                    { step: 7, title: 'Distribution', description: 'Successor trustee distributes assets per trust terms.' }
+                ],
+                modules: {
+                    revocability: ['Revocable'],
+                    taxTreatment: ['Estate Tax Reduction'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Grantor Retains Control'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: []
+                }
+            },
+            grat: {
+                name: 'Grantor Retained Annuity Trust (GRAT)',
+                description: 'Transfers appreciating assets to beneficiaries with minimal gift tax exposure.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates GRAT', 'Transfers assets', 'Receives annuity payments'],
+                    assets: ['$2M in stock', 'Business interests']
+                },
+                trustee: {
+                    name: 'Corporate Trustee',
+                    actions: ['Manages assets', 'Pays annuity to grantor', 'Distributes remainder'],
+                    powers: ['Investment management', 'Annuity calculation']
+                },
+                beneficiary: {
+                    name: 'Children',
+                    receives: ['Remainder interest', 'Appreciation above hurdle rate'],
+                    timing: 'After annuity term (typically 2-10 years)'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Fixed annuity term', 'Remainder to beneficiaries'],
+                    taxBenefits: ['Freezes asset value', 'Transfers appreciation tax-free']
+                },
+                flow: [
+                    { step: 1, title: 'GRAT Creation', description: 'Grantor creates irrevocable GRAT with fixed term (e.g., 5 years).' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciating assets (stock, business) to GRAT.' },
+                    { step: 3, title: 'Gift Tax Calculation', description: 'Gift value = asset value minus present value of annuity payments.' },
+                    { step: 4, title: 'Annuity Payments', description: 'GRAT pays fixed annuity to grantor annually (based on IRS rate).' },
+                    { step: 5, title: 'Asset Growth', description: 'Assets appreciate within GRAT during the term.' },
+                    { step: 6, title: 'Term Completion', description: 'After term ends, remainder (appreciation) goes to beneficiaries.' },
+                    { step: 7, title: 'Tax Benefit', description: 'Only initial gift value taxed; all appreciation transfers tax-free.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Gift Tax Exclusion'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Grantor Retains Control'],
+                    distribution: ['Mandatory'],
+                    specialFeatures: []
+                }
+            },
+            crt: {
+                name: 'Charitable Remainder Trust (CRT)',
+                description: 'Provides income to beneficiaries with remainder going to charity, generating tax deduction.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates CRT', 'Transfers appreciated assets', 'Receives income stream'],
+                    assets: ['$1M appreciated stock', 'Real estate']
+                },
+                trustee: {
+                    name: 'Charitable Organization or Individual',
+                    actions: ['Manages assets', 'Pays income to grantor', 'Distributes remainder to charity'],
+                    powers: ['Investment management', 'Charitable distribution']
+                },
+                beneficiary: {
+                    name: 'John (Income Beneficiary) & Charity (Remainder)',
+                    receives: ['Income stream (5-7% annually)', 'Charity gets remainder'],
+                    timing: 'Income during lifetime, remainder at death'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Fixed income percentage', 'Charitable remainder'],
+                    taxBenefits: ['Charitable income tax deduction', 'Avoids capital gains on sale']
+                },
+                flow: [
+                    { step: 1, title: 'CRT Creation', description: 'Grantor creates irrevocable CRT and names charity as remainder beneficiary.' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciated assets (stock, real estate) to CRT.' },
+                    { step: 3, title: 'Charitable Deduction', description: 'Grantor receives immediate income tax deduction for remainder value.' },
+                    { step: 4, title: 'Asset Sale', description: 'Trustee sells assets tax-free (no capital gains to grantor).' },
+                    { step: 5, title: 'Income Payments', description: 'Trust pays fixed percentage (5-7%) to grantor annually.' },
+                    { step: 6, title: 'Lifetime Income', description: 'Grantor receives income stream for life or fixed term.' },
+                    { step: 7, title: 'Charitable Remainder', description: 'Upon death or term end, remaining assets go to charity.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Income Tax Planning', 'Charitable Deduction'],
+                    primaryPurpose: ['Charitable Giving', 'Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Income Only', 'Charitable Remainder'],
+                    specialFeatures: []
+                }
+            }
+        };
+
+        let currentExample = 'ilit';
+
+        function renderTrustDiagram() {
+            const example = TRUST_EXAMPLES[currentExample];
+            const diagram = document.getElementById('trustDiagram');
+            
+            diagram.innerHTML = `
+                <div class="relative" style="min-height: 600px;">
+                    <style>
+                        @media (max-width: 768px) {
+                            #trustDiagram .absolute {
+                                position: relative !important;
+                                transform: none !important;
+                                margin-bottom: 2rem;
+                            }
+                            #trustDiagram svg {
+                                display: none;
+                            }
+                        }
+                    </style>
+                    <!-- Grantor Section -->
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <div class="bg-blue-600/20 border-2 border-blue-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                            <div class="text-2xl mb-2">👤</div>
+                            <h3 class="font-bold text-blue-400 text-lg mb-2">${example.grantor.name}</h3>
+                            <p class="text-xs text-slate-300 mb-3">Grantor</p>
+                            <div class="space-y-1 text-xs text-slate-400">
+                                ${example.grantor.actions.map(a => `<div>• ${a}</div>`).join('')}
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-blue-500/30">
+                                <p class="text-xs font-semibold text-blue-300 mb-2">Assets:</p>
+                                ${example.grantor.assets.map(a => `<div class="text-xs text-slate-300">${a}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trust Agreement (Center) -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div class="bg-purple-600/20 border-2 border-purple-500 rounded-xl p-6 text-center min-w-[280px] backdrop-blur-sm">
+                            <div class="text-3xl mb-2">📜</div>
+                            <h3 class="font-bold text-purple-400 text-lg mb-2">Trust Agreement</h3>
+                            <p class="text-xs text-slate-300 mb-3">${example.name}</p>
+                            <div class="space-y-2 text-xs">
+                                <div class="bg-slate-800/50 p-2 rounded">
+                                    <p class="font-semibold text-purple-300 mb-1">Terms:</p>
+                                    ${example.trustAgreement.terms.map(t => `<div class="text-slate-300">• ${t}</div>`).join('')}
+                                </div>
+                                <div class="bg-slate-800/50 p-2 rounded mt-2">
+                                    <p class="font-semibold text-purple-300 mb-1">Tax Benefits:</p>
+                                    ${example.trustAgreement.taxBenefits.map(t => `<div class="text-slate-300">• ${t}</div>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trustee Section -->
+                    <div class="absolute top-1/4 right-0 transform translate-x-1/4">
+                        <div class="bg-cyan-600/20 border-2 border-cyan-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                            <div class="text-2xl mb-2">⚖️</div>
+                            <h3 class="font-bold text-cyan-400 text-lg mb-2">${example.trustee.name}</h3>
+                            <p class="text-xs text-slate-300 mb-3">Trustee</p>
+                            <div class="space-y-1 text-xs text-slate-400">
+                                ${example.trustee.actions.map(a => `<div>• ${a}</div>`).join('')}
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-cyan-500/30">
+                                <p class="text-xs font-semibold text-cyan-300 mb-2">Powers:</p>
+                                ${example.trustee.powers.map(p => `<div class="text-xs text-slate-300">• ${p}</div>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Beneficiary Section -->
+                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
+                        <div class="bg-emerald-600/20 border-2 border-emerald-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                            <div class="text-2xl mb-2">👥</div>
+                            <h3 class="font-bold text-emerald-400 text-lg mb-2">${example.beneficiary.name}</h3>
+                            <p class="text-xs text-slate-300 mb-3">Beneficiary</p>
+                            <div class="space-y-1 text-xs text-slate-400 mb-3">
+                                ${example.beneficiary.receives.map(r => `<div>• ${r}</div>`).join('')}
+                            </div>
+                            <div class="text-xs text-emerald-300 font-semibold">
+                                Timing: ${example.beneficiary.timing}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Flow Arrows (SVG) -->
+                    <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
+                        <!-- Grantor to Trust -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+                            </marker>
+                            <marker id="arrowhead-cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#06b6d4" />
+                            </marker>
+                            <marker id="arrowhead-emerald" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#10b981" />
+                            </marker>
+                        </defs>
+                        <!-- Grantor to Trust Agreement -->
+                        <path d="M 50% 15% Q 50% 35%, 50% 40%" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5" />
+                        <text x="50%" y="28%" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="500">Assets & Control</text>
+                        
+                        <!-- Trust Agreement to Trustee -->
+                        <path d="M 65% 50% L 75% 30%" stroke="#06b6d4" stroke-width="2" fill="none" marker-end="url(#arrowhead-cyan)" stroke-dasharray="5,5" />
+                        <text x="70%" y="38%" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="500">Management</text>
+                        
+                        <!-- Trust Agreement to Beneficiary -->
+                        <path d="M 50% 60% Q 50% 75%, 50% 80%" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrowhead-emerald)" stroke-dasharray="5,5" />
+                        <text x="50%" y="72%" text-anchor="middle" fill="#34d399" font-size="11" font-weight="500">Distributions</text>
+                        
+                        <!-- Trustee to Beneficiary -->
+                        <path d="M 75% 35% Q 65% 70%, 55% 75%" stroke="#8b5cf6" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="3,3" opacity="0.7" />
+                        <text x="65%" y="55%" text-anchor="middle" fill="#a78bfa" font-size="10" opacity="0.9">Fiduciary Duty</text>
+                    </svg>
+                </div>
+            `;
+        }
+
+        function renderModuleBreakdown() {
+            const example = TRUST_EXAMPLES[currentExample];
+            const container = document.getElementById('moduleBreakdown');
+            container.innerHTML = '';
+
+            Object.entries(example.modules).forEach(([category, modules]) => {
+                if (modules.length === 0) return;
+                
+                const categoryInfo = {
+                    revocability: { name: 'Revocability', color: 'blue' },
+                    taxTreatment: { name: 'Tax Treatment', color: 'purple' },
+                    primaryPurpose: { name: 'Primary Purpose', color: 'cyan' },
+                    control: { name: 'Control Structure', color: 'pink' },
+                    distribution: { name: 'Distribution Method', color: 'emerald' },
+                    specialFeatures: { name: 'Special Features', color: 'yellow' }
+                };
+
+                const info = categoryInfo[category];
+                const colorMap = {
+                    blue: 'border-blue-500 bg-blue-500/10',
+                    purple: 'border-purple-500 bg-purple-500/10',
+                    cyan: 'border-cyan-500 bg-cyan-500/10',
+                    pink: 'border-pink-500 bg-pink-500/10',
+                    emerald: 'border-emerald-500 bg-emerald-500/10',
+                    yellow: 'border-yellow-500 bg-yellow-500/10'
+                };
+
+                const card = document.createElement('div');
+                card.className = `bg-slate-800 p-4 rounded-lg border-l-4 ${colorMap[info.color]}`;
+                card.innerHTML = `
+                    <h4 class="font-bold text-white mb-2">${info.name}</h4>
+                    <div class="space-y-1">
+                        ${modules.map(m => `<div class="text-sm text-slate-300">• ${m}</div>`).join('')}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderFlowExplanation() {
+            const example = TRUST_EXAMPLES[currentExample];
+            const container = document.getElementById('flowExplanation');
+            container.innerHTML = '';
+
+            example.flow.forEach((step, index) => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'flex gap-4 items-start';
+                stepDiv.innerHTML = `
+                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">
+                        ${step.step}
+                    </div>
+                    <div class="flex-1 bg-slate-800 p-4 rounded-lg">
+                        <h4 class="font-bold text-white mb-2">${step.title}</h4>
+                        <p class="text-sm text-slate-400">${step.description}</p>
+                    </div>
+                `;
+                container.appendChild(stepDiv);
+            });
+        }
+
+        function updateExample() {
+            const select = document.getElementById('trustExampleSelect');
+            currentExample = select.value;
+            const example = TRUST_EXAMPLES[currentExample];
+            
+            // Update description
+            const descEl = document.getElementById('trustDescription');
+            if (descEl) {
+                descEl.textContent = example.description;
+            }
+            
+            renderTrustDiagram();
+            renderModuleBreakdown();
+            renderFlowExplanation();
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const select = document.getElementById('trustExampleSelect');
+            if (select) {
+                select.addEventListener('change', updateExample);
+                updateExample();
             }
         });
 
@@ -1315,6 +1932,19 @@
 
         // Make filterByModule available globally
         window.filterByModule = filterByModule;
+
+        // Glossary toggle function
+        window.toggleGlossary = function() {
+            const content = document.getElementById('glossaryContent');
+            const toggleText = document.getElementById('glossaryToggleText');
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggleText.textContent = 'Hide';
+            } else {
+                content.classList.add('hidden');
+                toggleText.textContent = 'Show';
+            }
+        };
 
         // Comparison functionality
         let comparisonTrusts = [];
