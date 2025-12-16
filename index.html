@@ -67,7 +67,183 @@
         .gradient-text {
             background: linear-gradient(135deg, #3b82f6, #06b6d4);
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        /* Flowchart Timeline Styles */
+        .flow-timeline {
+            position: relative;
+            padding: 2rem 0;
+            max-height: 600px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .flow-timeline::before {
+            content: '';
+            position: absolute;
+            left: 35px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #3b82f6, #06b6d4, #8b5cf6);
+            border-radius: 2px;
+            animation: pulse-line 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-line {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .flow-step {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-left: 5rem;
+            opacity: 0;
+            animation: fadeInSlide 0.6s ease-out forwards;
+        }
+
+        .flow-step:nth-child(1) { animation-delay: 0.1s; }
+        .flow-step:nth-child(2) { animation-delay: 0.2s; }
+        .flow-step:nth-child(3) { animation-delay: 0.3s; }
+        .flow-step:nth-child(4) { animation-delay: 0.4s; }
+        .flow-step:nth-child(5) { animation-delay: 0.5s; }
+        .flow-step:nth-child(6) { animation-delay: 0.6s; }
+        .flow-step:nth-child(7) { animation-delay: 0.7s; }
+
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .flow-step-badge {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+            z-index: 2;
+            transition: all 0.3s ease;
+            border: 4px solid #0f172a;
+        }
+
+        .flow-step-badge::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #06b6d4);
+            opacity: 0;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+
+        .flow-step:hover .flow-step-badge {
+            transform: scale(1.15);
+            box-shadow: 0 6px 25px rgba(59, 130, 246, 0.6);
+        }
+
+        .flow-step:hover .flow-step-badge::after {
+            opacity: 0.3;
+            transform: scale(1.5);
+        }
+
+        .flow-step-content {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .flow-step-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #3b82f6, #06b6d4);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .flow-step:hover .flow-step-content {
+            border-color: rgba(59, 130, 246, 0.6);
+            transform: translateX(10px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .flow-step:hover .flow-step-content::before {
+            transform: scaleY(1);
+        }
+
+        .flow-step-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .flow-step-description {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .flow-connector {
+            position: absolute;
+            left: 35px;
+            top: 70px;
+            width: 3px;
+            height: calc(100% + 1rem);
+            background: linear-gradient(180deg, #06b6d4, #3b82f6);
+            z-index: 1;
+        }
+
+        .flow-step:last-child .flow-connector {
+            display: none;
+        }
+
+        /* Smooth scrollbar for flow timeline */
+        .flow-timeline::-webkit-scrollbar {
+            width: 10px;
+        }
+        .flow-timeline::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 5px;
+        }
+        .flow-timeline::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #3b82f6, #06b6d4);
+            border-radius: 5px;
+        }
+        .flow-timeline::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #06b6d4, #3b82f6);
         }
     </style>
     <!-- 
@@ -103,6 +279,7 @@
                         <a href="#tools" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">LLM Tools</a>
                         <a href="#example" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Example</a>
                         <a href="#trust-types" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Trust Types</a>
+                        <a href="#pitch-deck" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Pitch Deck</a>
                     </div>
                 </div>
             </div>
@@ -136,6 +313,76 @@
             </div>
         </div>
     </div>
+
+    <!-- Section Summaries -->
+    <section id="summaries" class="py-12 bg-[#0f172a] border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-8">
+                <h2 class="text-3xl font-bold text-white mb-4">Section Summaries</h2>
+                <p class="text-slate-400 text-lg">
+                    Quick overview of each section to help you navigate the content.
+                </p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="glass-panel p-5 rounded-xl hover:border-blue-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-blue-400 mb-2">1. Anatomy</div>
+                    <p class="text-sm text-slate-300 mb-2">The DNA of Every Trust</p>
+                    <p class="text-xs text-slate-400">
+                        Explains the fundamental tripartite structure: Grantor, Trustee, and Beneficiary. Uses a visual diagram to show how legal title and equitable title are split, and clarifies common confusions about hedge funds, REITs, and governance structures.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-cyan-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-cyan-400 mb-2">2. Adoption</div>
+                    <p class="text-sm text-slate-300 mb-2">Usage & The Wealth Gap</p>
+                    <p class="text-xs text-slate-400">
+                        Visualizes trust adoption rates by net worth, revealing a significant wealth gap. Shows that only 2% of US adults have trusts despite $5T+ in trust assets, and identifies key barriers preventing broader adoption including misconceptions and legal costs.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-purple-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-purple-400 mb-2">3. Alt Assets</div>
+                    <p class="text-sm text-slate-300 mb-2">The Asset Evolution</p>
+                    <p class="text-xs text-slate-400">
+                        Examines the shift from traditional portfolios (stocks, bonds) to alternative assets (real estate, crypto, private equity) in modern trusts. Highlights challenges: custody, liquidity, and valuation requirements that make alternative assets complex to manage in trusts.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-pink-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-pink-400 mb-2">4. LLM Tools</div>
+                    <p class="text-sm text-slate-300 mb-2">Trust Analyst Tools</p>
+                    <p class="text-xs text-slate-400">
+                        Interactive AI-powered tools using Generative AI: (1) Trust Definition Generator - explains any trust type with concise breakdowns, (2) Regulatory Insight - provides web-grounded summaries of latest regulatory changes affecting alternative assets in trusts.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-emerald-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">5. Example</div>
+                    <p class="text-sm text-slate-300 mb-2">Trust in Action</p>
+                    <p class="text-xs text-slate-400">
+                        Interactive visual diagram showing how trust components interact in real-world examples (ILIT, Revocable Living Trust, GRAT, CRT). Includes responsive flowcharts with step-by-step processes, module breakdowns, and examples featuring alternative assets like real estate and private equity.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-yellow-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-yellow-400 mb-2">6. Trust Types</div>
+                    <p class="text-sm text-slate-300 mb-2">Modular Analysis</p>
+                    <p class="text-xs text-slate-400">
+                        Comprehensive database of 25+ trust types with modular categorization. Features search, filtering by modules, usage statistics, and MVP analysis showing which modules need to be built to serve various percentages of popular trusts. Click statistics to see which trusts use each module.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-indigo-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-indigo-400 mb-2">7. Pitch Deck</div>
+                    <p class="text-sm text-slate-300 mb-2">Orion Innovation</p>
+                    <p class="text-xs text-slate-400">
+                        Customized pitch deck for automating trust creation and execution, tailored to Orion Innovation's digital transformation expertise. Covers three-phase implementation (Data Layer, Rules Framework Testing, Money Movement), business value, and how Orion's 12 global delivery centers provide strategic advantage.
+                    </p>
+                </div>
+                <div class="glass-panel p-5 rounded-xl hover:border-rose-500 transition border border-slate-700">
+                    <div class="text-2xl font-bold text-rose-400 mb-2">MVP Analysis</div>
+                    <p class="text-sm text-slate-300 mb-2">Building the Foundation</p>
+                    <p class="text-xs text-slate-400">
+                        Calculates which modules need to be built to serve various percentages of popular trusts. Defines MVP as top 5 most-used modules and shows which trust types would be covered. Includes coverage analysis at different module counts (5, 10, 15, all) with strategic insights for development prioritization.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Section 1: The Anatomy of a Trust -->
     <section id="anatomy" class="py-12 bg-slate-900">
@@ -391,7 +638,7 @@
             </div>
 
             <!-- Interactive Trust Diagram -->
-            <div class="glass-panel p-8 rounded-xl relative overflow-hidden" id="trustDiagram">
+            <div class="glass-panel p-4 sm:p-6 lg:p-8 rounded-xl relative overflow-visible" id="trustDiagram">
                 <!-- Diagram will be rendered here by JavaScript -->
             </div>
 
@@ -402,8 +649,11 @@
 
             <!-- Flow Explanation -->
             <div class="mt-8 glass-panel p-6 rounded-xl">
-                <h3 class="text-xl font-bold text-white mb-4">How It Works: Step-by-Step</h3>
-                <div id="flowExplanation" class="space-y-4">
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+                    How It Works: Step-by-Step
+                </h3>
+                <div id="flowExplanation" class="flow-timeline">
                     <!-- Flow steps will be populated by JavaScript -->
                 </div>
             </div>
@@ -637,8 +887,41 @@
             <!-- Module Statistics -->
             <div class="glass-panel p-6 rounded-xl mb-8">
                 <h3 class="text-xl font-bold text-white mb-4">Module Usage Statistics</h3>
+                <p class="text-xs text-slate-400 mb-4">Click a statistic to see which trust types use that module</p>
                 <div id="moduleStats" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     <!-- Stats will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Modal for showing trust types by module -->
+            <div id="moduleTrustsModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden p-4" style="display: none;">
+                <div class="glass-panel rounded-xl max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+                    <div class="p-6 border-b border-slate-700 flex justify-between items-center">
+                        <div>
+                            <h3 class="text-xl font-bold text-white" id="modalModuleName"></h3>
+                            <p class="text-sm text-slate-400 mt-1" id="modalModuleCount"></p>
+                        </div>
+                        <button onclick="closeModuleModal()" class="text-slate-400 hover:text-white text-2xl font-bold w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-700 transition">×</button>
+                    </div>
+                    <div class="p-6 overflow-y-auto flex-1" id="modalTrustList">
+                        <!-- Trust types list will be populated here -->
+                    </div>
+                    <div class="p-4 border-t border-slate-700 flex gap-3">
+                        <button onclick="closeModuleModal()" class="flex-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition">Close</button>
+                        <button onclick="applyModuleFilterFromModal()" class="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition">Filter by This Module</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MVP Module Analysis -->
+            <div class="glass-panel p-6 rounded-xl mb-8">
+                <h3 class="text-xl font-bold text-white mb-4">MVP Module Analysis: Building the Foundation</h3>
+                <p class="text-sm text-slate-400 mb-6">
+                    Calculate which modules need to be built to serve various percentages of popular trusts. 
+                    The MVP (Minimum Viable Product) focuses on the top 5 most-used modules to maximize coverage with minimal development.
+                </p>
+                <div id="mvpAnalysis" class="space-y-6">
+                    <!-- MVP analysis will be populated by JavaScript -->
                 </div>
             </div>
 
@@ -653,6 +936,35 @@
                 <div id="comparisonTable" class="overflow-x-auto">
                     <!-- Comparison table will be populated by JavaScript -->
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 7: Pitch Deck Generator for Orion Innovation -->
+    <section id="pitch-deck" class="py-12 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">7. Trust Automation Pitch: Orion Innovation</h2>
+                <p class="text-slate-400 text-lg">
+                    Generate a customized pitch deck for automating trust creation and execution, tailored to Orion Innovation's digital transformation expertise and financial services focus.
+                </p>
+            </div>
+
+            <div class="glass-panel p-6 rounded-xl mb-8">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xl font-bold text-white">Generate Pitch Deck</h3>
+                    <button onclick="generatePitchDeck()" class="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition">
+                        Generate Pitch Deck
+                    </button>
+                </div>
+                <p class="text-sm text-slate-400">
+                    Click to generate a comprehensive pitch deck showcasing how automated trust solutions can transform Orion Innovation's Wealth & Asset Management services.
+                </p>
+            </div>
+
+            <!-- Pitch Deck Container -->
+            <div id="pitchDeckContainer" class="space-y-6">
+                <!-- Pitch slides will be generated here -->
             </div>
         </div>
     </section>
@@ -1016,7 +1328,7 @@
                 grantor: {
                     name: 'John (Grantor)',
                     actions: ['Creates trust', 'Funds with gifts', 'Pays gift tax on premiums'],
-                    assets: ['$50,000 annual gifts', 'Life Insurance Policy']
+                    assets: ['$50,000 annual gifts', 'Life Insurance Policy', 'Real estate (rental property)']
                 },
                 trustee: {
                     name: 'Sarah (Trustee)',
@@ -1034,12 +1346,12 @@
                 },
                 flow: [
                     { step: 1, title: 'Trust Creation', description: 'Grantor creates irrevocable trust and names trustee and beneficiaries.' },
-                    { step: 2, title: 'Funding', description: 'Grantor makes annual gifts to trust (up to $18,000 per beneficiary, indexed).' },
+                    { step: 2, title: 'Funding', description: 'Grantor makes annual gifts to trust (up to $18,000 per beneficiary, indexed). May include real estate or other alternative assets.' },
                     { step: 3, title: 'Crummey Notice', description: 'Beneficiaries receive withdrawal rights notice (typically 30-60 days).' },
-                    { step: 4, title: 'Premium Payment', description: 'Trustee uses trust funds to pay life insurance premiums.' },
-                    { step: 5, title: 'Policy Ownership', description: 'Trust owns the policy, removing it from grantor\'s estate.' },
-                    { step: 6, title: 'Death Benefit', description: 'Upon grantor\'s death, insurance pays tax-free to trust.' },
-                    { step: 7, title: 'Distribution', description: 'Trustee distributes proceeds to beneficiaries per trust terms.' }
+                    { step: 4, title: 'Premium Payment', description: 'Trustee uses trust funds to pay life insurance premiums. Rental income from real estate assets can fund premiums.' },
+                    { step: 5, title: 'Policy Ownership', description: 'Trust owns the policy, removing it from grantor\'s estate. Alternative assets remain in trust.' },
+                    { step: 6, title: 'Death Benefit', description: 'Upon grantor\'s death, insurance pays tax-free to trust. Real estate and other assets also pass to trust.' },
+                    { step: 7, title: 'Distribution', description: 'Trustee distributes proceeds to beneficiaries per trust terms. May include sale of real estate or continued management.' }
                 ],
                 modules: {
                     revocability: ['Irrevocable'],
@@ -1056,7 +1368,7 @@
                 grantor: {
                     name: 'John (Grantor/Trustee)',
                     actions: ['Creates trust', 'Transfers assets', 'Manages investments', 'Can revoke anytime'],
-                    assets: ['Home', 'Investment accounts', 'Bank accounts']
+                    assets: ['Home', 'Investment accounts', 'Bank accounts', 'Commercial real estate', 'Private equity interests']
                 },
                 trustee: {
                     name: 'John (Same as Grantor)',
@@ -1074,12 +1386,12 @@
                 },
                 flow: [
                     { step: 1, title: 'Trust Creation', description: 'Grantor creates revocable trust and names successor trustee.' },
-                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets (home, accounts) into trust name.' },
-                    { step: 3, title: 'Lifetime Management', description: 'Grantor manages trust assets as trustee, retains full control.' },
-                    { step: 4, title: 'Modification Rights', description: 'Grantor can modify, amend, or revoke trust at any time.' },
-                    { step: 5, title: 'Incapacity', description: 'If grantor becomes incapacitated, successor trustee takes over.' },
-                    { step: 6, title: 'Death', description: 'Upon death, assets pass to beneficiaries without probate.' },
-                    { step: 7, title: 'Distribution', description: 'Successor trustee distributes assets per trust terms.' }
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets into trust: home, accounts, commercial real estate, and private equity interests. Real estate requires deed transfer.' },
+                    { step: 3, title: 'Lifetime Management', description: 'Grantor manages trust assets as trustee, retains full control. Can collect rental income, manage real estate, or sell alternative assets.' },
+                    { step: 4, title: 'Modification Rights', description: 'Grantor can modify, amend, or revoke trust at any time, including adding/removing alternative assets.' },
+                    { step: 5, title: 'Incapacity', description: 'If grantor becomes incapacitated, successor trustee takes over management of all assets including real estate and alternative investments.' },
+                    { step: 6, title: 'Death', description: 'Upon death, all assets (including real estate and alternative assets) pass to beneficiaries without probate.' },
+                    { step: 7, title: 'Distribution', description: 'Successor trustee distributes assets per trust terms. May sell real estate, transfer property deeds, or continue managing alternative assets.' }
                 ],
                 modules: {
                     revocability: ['Revocable'],
@@ -1096,7 +1408,7 @@
                 grantor: {
                     name: 'John (Grantor)',
                     actions: ['Creates GRAT', 'Transfers assets', 'Receives annuity payments'],
-                    assets: ['$2M in stock', 'Business interests']
+                    assets: ['$2M in stock', 'Business interests', 'Commercial real estate', 'Private equity fund interests']
                 },
                 trustee: {
                     name: 'Corporate Trustee',
@@ -1114,12 +1426,12 @@
                 },
                 flow: [
                     { step: 1, title: 'GRAT Creation', description: 'Grantor creates irrevocable GRAT with fixed term (e.g., 5 years).' },
-                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciating assets (stock, business) to GRAT.' },
-                    { step: 3, title: 'Gift Tax Calculation', description: 'Gift value = asset value minus present value of annuity payments.' },
-                    { step: 4, title: 'Annuity Payments', description: 'GRAT pays fixed annuity to grantor annually (based on IRS rate).' },
-                    { step: 5, title: 'Asset Growth', description: 'Assets appreciate within GRAT during the term.' },
-                    { step: 6, title: 'Term Completion', description: 'After term ends, remainder (appreciation) goes to beneficiaries.' },
-                    { step: 7, title: 'Tax Benefit', description: 'Only initial gift value taxed; all appreciation transfers tax-free.' }
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciating assets to GRAT: stock, business interests, commercial real estate, or private equity. Real estate requires professional valuation and deed transfer.' },
+                    { step: 3, title: 'Gift Tax Calculation', description: 'Gift value = asset value minus present value of annuity payments. Alternative assets require annual appraisals for valuation.' },
+                    { step: 4, title: 'Annuity Payments', description: 'GRAT pays fixed annuity to grantor annually (based on IRS rate). Can be funded by rental income from real estate or asset sales.' },
+                    { step: 5, title: 'Asset Growth', description: 'Assets appreciate within GRAT during the term. Real estate and private equity may appreciate significantly, exceeding hurdle rate.' },
+                    { step: 6, title: 'Term Completion', description: 'After term ends, remainder (appreciation) goes to beneficiaries. May include real estate, private equity interests, or cash from sales.' },
+                    { step: 7, title: 'Tax Benefit', description: 'Only initial gift value taxed; all appreciation transfers tax-free. Particularly valuable for rapidly appreciating alternative assets.' }
                 ],
                 modules: {
                     revocability: ['Irrevocable'],
@@ -1136,7 +1448,7 @@
                 grantor: {
                     name: 'John (Grantor)',
                     actions: ['Creates CRT', 'Transfers appreciated assets', 'Receives income stream'],
-                    assets: ['$1M appreciated stock', 'Real estate']
+                    assets: ['$1M appreciated stock', 'Commercial real estate', 'Art collection', 'Private equity interests']
                 },
                 trustee: {
                     name: 'Charitable Organization or Individual',
@@ -1154,12 +1466,12 @@
                 },
                 flow: [
                     { step: 1, title: 'CRT Creation', description: 'Grantor creates irrevocable CRT and names charity as remainder beneficiary.' },
-                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciated assets (stock, real estate) to CRT.' },
-                    { step: 3, title: 'Charitable Deduction', description: 'Grantor receives immediate income tax deduction for remainder value.' },
-                    { step: 4, title: 'Asset Sale', description: 'Trustee sells assets tax-free (no capital gains to grantor).' },
-                    { step: 5, title: 'Income Payments', description: 'Trust pays fixed percentage (5-7%) to grantor annually.' },
-                    { step: 6, title: 'Lifetime Income', description: 'Grantor receives income stream for life or fixed term.' },
-                    { step: 7, title: 'Charitable Remainder', description: 'Upon death or term end, remaining assets go to charity.' }
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers appreciated assets to CRT: stock, commercial real estate, art collection, or private equity. Alternative assets require professional appraisals.' },
+                    { step: 3, title: 'Charitable Deduction', description: 'Grantor receives immediate income tax deduction for remainder value. Larger deduction possible with highly appreciated alternative assets.' },
+                    { step: 4, title: 'Asset Sale', description: 'Trustee sells assets tax-free (no capital gains to grantor). Real estate and art can be sold without triggering capital gains tax to grantor.' },
+                    { step: 5, title: 'Income Payments', description: 'Trust pays fixed percentage (5-7%) to grantor annually. Can be funded by rental income from retained real estate or investment returns.' },
+                    { step: 6, title: 'Lifetime Income', description: 'Grantor receives income stream for life or fixed term. Income can be generated from diversified portfolio including alternative assets.' },
+                    { step: 7, title: 'Charitable Remainder', description: 'Upon death or term end, remaining assets go to charity. May include remaining real estate, investment portfolio, or cash from asset sales.' }
                 ],
                 modules: {
                     revocability: ['Irrevocable'],
@@ -1178,25 +1490,166 @@
             const example = TRUST_EXAMPLES[currentExample];
             const diagram = document.getElementById('trustDiagram');
             
+            // Use viewBox for responsive SVG instead of fixed dimensions
+            const viewBoxWidth = 1000;
+            const viewBoxHeight = 700;
+            
+            // Calculate positions as percentages of viewBox (will scale automatically)
+            const centerX = viewBoxWidth / 2;
+            const topY = 100;
+            const middleY = viewBoxHeight / 2;
+            const bottomY = viewBoxHeight - 100;
+            const leftX = viewBoxWidth * 0.2;
+            const rightX = viewBoxWidth * 0.8;
+            
             diagram.innerHTML = `
-                <div class="relative" style="min-height: 600px;">
-                    <style>
-                        @media (max-width: 768px) {
-                            #trustDiagram .absolute {
-                                position: relative !important;
-                                transform: none !important;
-                                margin-bottom: 2rem;
-                            }
-                            #trustDiagram svg {
-                                display: none;
-                            }
+                <style>
+                    .trust-diagram-container {
+                        position: relative;
+                        min-height: 700px;
+                        padding: 2rem 1rem;
+                        overflow: visible;
+                    }
+                    
+                    .trust-card {
+                        background: rgba(30, 41, 59, 0.8);
+                        backdrop-filter: blur(10px);
+                        border: 2px solid;
+                        border-radius: 12px;
+                        padding: 1.25rem;
+                        text-align: center;
+                        word-wrap: break-word;
+                        overflow-wrap: break-word;
+                        max-width: 100%;
+                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+                    }
+                    
+                    .trust-card h3 {
+                        font-size: clamp(1rem, 2vw, 1.125rem);
+                        margin-bottom: 0.5rem;
+                        line-height: 1.3;
+                    }
+                    
+                    .trust-card p, .trust-card div {
+                        font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+                        line-height: 1.4;
+                    }
+                    
+                    .trust-card ul, .trust-card .space-y-1 {
+                        text-align: left;
+                        margin-top: 0.5rem;
+                    }
+                    
+                    /* Desktop Layout */
+                    @media (min-width: 1024px) {
+                        .trust-diagram-grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            grid-template-rows: auto 1fr auto;
+                            gap: 2rem;
+                            position: relative;
+                            min-height: 600px;
                         }
-                    </style>
-                    <!-- Grantor Section -->
-                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                        <div class="bg-blue-600/20 border-2 border-blue-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                        
+                        .trust-grantor {
+                            grid-column: 1 / -1;
+                            grid-row: 1;
+                            justify-self: center;
+                            max-width: 300px;
+                        }
+                        
+                        .trust-agreement {
+                            grid-column: 1;
+                            grid-row: 2;
+                            align-self: center;
+                            max-width: 320px;
+                        }
+                        
+                        .trust-trustee {
+                            grid-column: 2;
+                            grid-row: 2;
+                            align-self: start;
+                            max-width: 280px;
+                        }
+                        
+                        .trust-beneficiary {
+                            grid-column: 1 / -1;
+                            grid-row: 3;
+                            justify-self: center;
+                            max-width: 300px;
+                        }
+                        
+                        .trust-arrows {
+                            display: block;
+                        }
+                    }
+                    
+                    /* Tablet Layout */
+                    @media (min-width: 768px) and (max-width: 1023px) {
+                        .trust-diagram-grid {
+                            display: grid;
+                            grid-template-columns: 1fr 1fr;
+                            grid-template-rows: auto auto auto;
+                            gap: 1.5rem;
+                            position: relative;
+                        }
+                        
+                        .trust-grantor {
+                            grid-column: 1 / -1;
+                            grid-row: 1;
+                            justify-self: center;
+                            max-width: 100%;
+                        }
+                        
+                        .trust-agreement {
+                            grid-column: 1;
+                            grid-row: 2;
+                            max-width: 100%;
+                        }
+                        
+                        .trust-trustee {
+                            grid-column: 2;
+                            grid-row: 2;
+                            max-width: 100%;
+                        }
+                        
+                        .trust-beneficiary {
+                            grid-column: 1 / -1;
+                            grid-row: 3;
+                            justify-self: center;
+                            max-width: 100%;
+                        }
+                        
+                        .trust-arrows {
+                            display: none;
+                        }
+                    }
+                    
+                    /* Mobile Layout */
+                    @media (max-width: 767px) {
+                        .trust-diagram-grid {
+                            display: flex;
+                            flex-direction: column;
+                            gap: 1.5rem;
+                        }
+                        
+                        .trust-card {
+                            width: 100%;
+                            max-width: 100%;
+                        }
+                        
+                        .trust-arrows {
+                            display: none;
+                        }
+                    }
+                </style>
+                
+                <div class="trust-diagram-container">
+                    <div class="trust-diagram-grid">
+                        <!-- Grantor Section -->
+                        <div class="trust-card trust-grantor border-blue-500 bg-blue-600/20">
                             <div class="text-2xl mb-2">👤</div>
-                            <h3 class="font-bold text-blue-400 text-lg mb-2">${example.grantor.name}</h3>
+                            <h3 class="font-bold text-blue-400">${example.grantor.name}</h3>
                             <p class="text-xs text-slate-300 mb-3">Grantor</p>
                             <div class="space-y-1 text-xs text-slate-400">
                                 ${example.grantor.actions.map(a => `<div>• ${a}</div>`).join('')}
@@ -1206,32 +1659,28 @@
                                 ${example.grantor.assets.map(a => `<div class="text-xs text-slate-300">${a}</div>`).join('')}
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Trust Agreement (Center) -->
-                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                        <div class="bg-purple-600/20 border-2 border-purple-500 rounded-xl p-6 text-center min-w-[280px] backdrop-blur-sm">
+                        <!-- Trust Agreement (Center) -->
+                        <div class="trust-card trust-agreement border-purple-500 bg-purple-600/20">
                             <div class="text-3xl mb-2">📜</div>
-                            <h3 class="font-bold text-purple-400 text-lg mb-2">Trust Agreement</h3>
-                            <p class="text-xs text-slate-300 mb-3">${example.name}</p>
+                            <h3 class="font-bold text-purple-400">Trust Agreement</h3>
+                            <p class="text-xs text-slate-300 mb-3 break-words">${example.name}</p>
                             <div class="space-y-2 text-xs">
                                 <div class="bg-slate-800/50 p-2 rounded">
                                     <p class="font-semibold text-purple-300 mb-1">Terms:</p>
-                                    ${example.trustAgreement.terms.map(t => `<div class="text-slate-300">• ${t}</div>`).join('')}
+                                    ${example.trustAgreement.terms.map(t => `<div class="text-slate-300 break-words">• ${t}</div>`).join('')}
                                 </div>
                                 <div class="bg-slate-800/50 p-2 rounded mt-2">
                                     <p class="font-semibold text-purple-300 mb-1">Tax Benefits:</p>
-                                    ${example.trustAgreement.taxBenefits.map(t => `<div class="text-slate-300">• ${t}</div>`).join('')}
+                                    ${example.trustAgreement.taxBenefits.map(t => `<div class="text-slate-300 break-words">• ${t}</div>`).join('')}
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Trustee Section -->
-                    <div class="absolute top-1/4 right-0 transform translate-x-1/4">
-                        <div class="bg-cyan-600/20 border-2 border-cyan-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                        <!-- Trustee Section -->
+                        <div class="trust-card trust-trustee border-cyan-500 bg-cyan-600/20">
                             <div class="text-2xl mb-2">⚖️</div>
-                            <h3 class="font-bold text-cyan-400 text-lg mb-2">${example.trustee.name}</h3>
+                            <h3 class="font-bold text-cyan-400">${example.trustee.name}</h3>
                             <p class="text-xs text-slate-300 mb-3">Trustee</p>
                             <div class="space-y-1 text-xs text-slate-400">
                                 ${example.trustee.actions.map(a => `<div>• ${a}</div>`).join('')}
@@ -1241,52 +1690,86 @@
                                 ${example.trustee.powers.map(p => `<div class="text-xs text-slate-300">• ${p}</div>`).join('')}
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Beneficiary Section -->
-                    <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
-                        <div class="bg-emerald-600/20 border-2 border-emerald-500 rounded-xl p-6 text-center min-w-[200px] backdrop-blur-sm">
+                        <!-- Beneficiary Section -->
+                        <div class="trust-card trust-beneficiary border-emerald-500 bg-emerald-600/20">
                             <div class="text-2xl mb-2">👥</div>
-                            <h3 class="font-bold text-emerald-400 text-lg mb-2">${example.beneficiary.name}</h3>
+                            <h3 class="font-bold text-emerald-400">${example.beneficiary.name}</h3>
                             <p class="text-xs text-slate-300 mb-3">Beneficiary</p>
                             <div class="space-y-1 text-xs text-slate-400 mb-3">
                                 ${example.beneficiary.receives.map(r => `<div>• ${r}</div>`).join('')}
                             </div>
-                            <div class="text-xs text-emerald-300 font-semibold">
+                            <div class="text-xs text-emerald-300 font-semibold break-words">
                                 Timing: ${example.beneficiary.timing}
                             </div>
                         </div>
                     </div>
 
-                    <!-- Flow Arrows (SVG) -->
-                    <svg class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;">
-                        <!-- Grantor to Trust -->
+                    <!-- Flow Arrows (SVG) - Desktop Only -->
+                    <svg class="trust-arrows absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;" viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" preserveAspectRatio="xMidYMid meet">
                         <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="#3b82f6" />
+                            <marker id="arrowhead-blue" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                                <polygon points="0 0, 12 4, 0 8" fill="#3b82f6" stroke="#3b82f6" stroke-width="0.5" />
                             </marker>
-                            <marker id="arrowhead-cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="#06b6d4" />
+                            <marker id="arrowhead-cyan" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                                <polygon points="0 0, 12 4, 0 8" fill="#06b6d4" stroke="#06b6d4" stroke-width="0.5" />
                             </marker>
-                            <marker id="arrowhead-emerald" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
-                                <polygon points="0 0, 10 3, 0 6" fill="#10b981" />
+                            <marker id="arrowhead-emerald" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                                <polygon points="0 0, 12 4, 0 8" fill="#10b981" stroke="#10b981" stroke-width="0.5" />
                             </marker>
+                            <marker id="arrowhead-purple" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
+                                <polygon points="0 0, 12 4, 0 8" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="0.5" />
+                            </marker>
+                            <!-- Background for text labels -->
+                            <filter id="textBackground" x="-20%" y="-20%" width="140%" height="140%">
+                                <feFlood flood-color="rgba(15, 23, 42, 0.9)" result="bg"/>
+                                <feComposite in="bg" in2="SourceAlpha" operator="in"/>
+                            </filter>
                         </defs>
-                        <!-- Grantor to Trust Agreement -->
-                        <path d="M 50% 15% Q 50% 35%, 50% 40%" stroke="#3b82f6" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5" />
-                        <text x="50%" y="28%" text-anchor="middle" fill="#60a5fa" font-size="11" font-weight="500">Assets & Control</text>
                         
-                        <!-- Trust Agreement to Trustee -->
-                        <path d="M 65% 50% L 75% 30%" stroke="#06b6d4" stroke-width="2" fill="none" marker-end="url(#arrowhead-cyan)" stroke-dasharray="5,5" />
-                        <text x="70%" y="38%" text-anchor="middle" fill="#22d3ee" font-size="11" font-weight="500">Management</text>
+                        <!-- Grantor to Trust Agreement: Assets & Control -->
+                        <path d="M ${centerX} ${topY + 70} Q ${centerX} ${topY + 130} ${leftX + 20} ${middleY - 30}" 
+                              stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead-blue)" 
+                              opacity="0.9" />
+                        <g>
+                            <rect x="${(centerX + leftX) / 2 - 60}" y="${topY + 100 - 10}" width="120" height="20" 
+                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
+                            <text x="${(centerX + leftX) / 2}" y="${topY + 105}" text-anchor="middle" 
+                                  fill="#60a5fa" font-size="13" font-weight="600">Transfers Assets</text>
+                        </g>
                         
-                        <!-- Trust Agreement to Beneficiary -->
-                        <path d="M 50% 60% Q 50% 75%, 50% 80%" stroke="#10b981" stroke-width="2" fill="none" marker-end="url(#arrowhead-emerald)" stroke-dasharray="5,5" />
-                        <text x="50%" y="72%" text-anchor="middle" fill="#34d399" font-size="11" font-weight="500">Distributions</text>
+                        <!-- Trust Agreement to Trustee: Management Authority -->
+                        <path d="M ${leftX + 60} ${middleY - 10} L ${rightX - 60} ${middleY - 110}" 
+                              stroke="#06b6d4" stroke-width="3" fill="none" marker-end="url(#arrowhead-cyan)" 
+                              opacity="0.9" />
+                        <g>
+                            <rect x="${(leftX + rightX) / 2 - 75}" y="${middleY - 70 - 10}" width="150" height="20" 
+                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
+                            <text x="${(leftX + rightX) / 2}" y="${middleY - 65}" text-anchor="middle" 
+                                  fill="#22d3ee" font-size="13" font-weight="600">Management Authority</text>
+                        </g>
                         
-                        <!-- Trustee to Beneficiary -->
-                        <path d="M 75% 35% Q 65% 70%, 55% 75%" stroke="#8b5cf6" stroke-width="2" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="3,3" opacity="0.7" />
-                        <text x="65%" y="55%" text-anchor="middle" fill="#a78bfa" font-size="10" opacity="0.9">Fiduciary Duty</text>
+                        <!-- Trust Agreement to Beneficiary: Distributions -->
+                        <path d="M ${leftX + 20} ${middleY + 50} Q ${centerX - 30} ${middleY + 120} ${centerX - 20} ${bottomY - 90}" 
+                              stroke="#10b981" stroke-width="3" fill="none" marker-end="url(#arrowhead-emerald)" 
+                              opacity="0.9" />
+                        <g>
+                            <rect x="${centerX - 70}" y="${(middleY + 50 + bottomY - 90) / 2 - 10}" width="140" height="20" 
+                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
+                            <text x="${centerX}" y="${(middleY + 50 + bottomY - 90) / 2 + 5}" text-anchor="middle" 
+                                  fill="#34d399" font-size="13" font-weight="600">Distributions</text>
+                        </g>
+                        
+                        <!-- Trustee to Beneficiary: Fiduciary Duty -->
+                        <path d="M ${rightX - 60} ${middleY - 90} Q ${centerX + 40} ${middleY + 30} ${centerX + 30} ${bottomY - 90}" 
+                              stroke="#8b5cf6" stroke-width="2.5" fill="none" marker-end="url(#arrowhead-purple)" 
+                              stroke-dasharray="4,4" opacity="0.75" />
+                        <g>
+                            <rect x="${(rightX + centerX) / 2 - 55}" y="${middleY - 20 - 10}" width="110" height="20" 
+                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
+                            <text x="${(rightX + centerX) / 2}" y="${middleY - 15}" text-anchor="middle" 
+                                  fill="#a78bfa" font-size="12" font-weight="600">Fiduciary Duty</text>
+                        </g>
                     </svg>
                 </div>
             `;
@@ -1338,14 +1821,13 @@
 
             example.flow.forEach((step, index) => {
                 const stepDiv = document.createElement('div');
-                stepDiv.className = 'flex gap-4 items-start';
+                stepDiv.className = 'flow-step';
                 stepDiv.innerHTML = `
-                    <div class="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center font-bold text-white">
-                        ${step.step}
-                    </div>
-                    <div class="flex-1 bg-slate-800 p-4 rounded-lg">
-                        <h4 class="font-bold text-white mb-2">${step.title}</h4>
-                        <p class="text-sm text-slate-400">${step.description}</p>
+                    <div class="flow-step-badge">${step.step}</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-step-content">
+                        <h4 class="flow-step-title">${step.title}</h4>
+                        <p class="flow-step-description">${step.description}</p>
                     </div>
                 `;
                 container.appendChild(stepDiv);
@@ -1836,11 +2318,120 @@
                     <div class="text-2xl font-bold text-cyan-400">${count}</div>
                     <div class="text-xs text-slate-500">of ${TRUST_TYPES.length} trusts</div>
                 `;
-                statCard.onclick = () => filterByModule(module);
+                statCard.onclick = () => showModuleTrusts(module);
                 statCard.className += ' cursor-pointer hover:border-cyan-500 transition';
                 statsContainer.appendChild(statCard);
             });
         }
+
+        let currentModalModule = null;
+
+        function showModuleTrusts(module) {
+            currentModalModule = module;
+            const modal = document.getElementById('moduleTrustsModal');
+            const moduleNameEl = document.getElementById('modalModuleName');
+            const moduleCountEl = document.getElementById('modalModuleCount');
+            const trustListEl = document.getElementById('modalTrustList');
+
+            // Get all trusts that use this module
+            const trustsWithModule = TRUST_TYPES.filter(trust => {
+                const trustModules = [];
+                Object.values(trust.modules).forEach(moduleArray => {
+                    moduleArray.forEach(mod => trustModules.push(mod));
+                });
+                return trustModules.includes(module);
+            });
+
+            // Update modal header
+            moduleNameEl.textContent = module;
+            moduleCountEl.textContent = `${trustsWithModule.length} of ${TRUST_TYPES.length} trust types use this module`;
+
+            // Populate trust list
+            trustListEl.innerHTML = '';
+            if (trustsWithModule.length === 0) {
+                trustListEl.innerHTML = '<p class="text-slate-400 text-center py-8">No trust types use this module.</p>';
+            } else {
+                trustsWithModule.forEach(trust => {
+                    const trustItem = document.createElement('div');
+                    trustItem.className = 'bg-slate-800/50 p-4 rounded-lg border border-slate-700 mb-3 hover:border-cyan-500 transition cursor-pointer';
+                    trustItem.onclick = () => {
+                        // Scroll to trust in the grid
+                        scrollToTrust(trust.name);
+                        closeModuleModal();
+                    };
+                    
+                    // Get all modules for this trust
+                    const trustModules = [];
+                    Object.values(trust.modules).forEach(moduleArray => {
+                        moduleArray.forEach(mod => trustModules.push(mod));
+                    });
+
+                    trustItem.innerHTML = `
+                        <h4 class="font-bold text-white mb-2">${trust.name}</h4>
+                        <p class="text-sm text-slate-400 mb-3">${trust.description}</p>
+                        <div class="flex flex-wrap gap-2">
+                            ${trustModules.map(mod => {
+                                const isHighlighted = mod === module;
+                                return `<span class="px-2 py-1 text-xs rounded-full ${isHighlighted ? 'bg-cyan-500/30 text-cyan-300 border-cyan-500' : 'bg-slate-700/50 text-slate-400 border-slate-600'} border">${mod}</span>`;
+                            }).join('')}
+                        </div>
+                    `;
+                    trustListEl.appendChild(trustItem);
+                });
+            }
+
+            // Show modal
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            modal.classList.add('items-center', 'justify-center');
+        }
+
+        function closeModuleModal() {
+            const modal = document.getElementById('moduleTrustsModal');
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+            modal.classList.remove('items-center', 'justify-center');
+            currentModalModule = null;
+        }
+
+        function applyModuleFilterFromModal() {
+            if (currentModalModule) {
+                filterByModule(currentModalModule);
+                closeModuleModal();
+            }
+        }
+
+        function scrollToTrust(trustName) {
+            // Find the trust card in the grid and scroll to it
+            const container = document.getElementById('trustTypesContainer');
+            const cards = container.querySelectorAll('[class*="glass-panel"]');
+            cards.forEach(card => {
+                const heading = card.querySelector('h3');
+                if (heading && heading.textContent === trustName) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    // Add a highlight effect
+                    card.classList.add('ring-2', 'ring-cyan-500');
+                    setTimeout(() => {
+                        card.classList.remove('ring-2', 'ring-cyan-500');
+                    }, 2000);
+                }
+            });
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('moduleTrustsModal');
+            if (e.target === modal) {
+                closeModuleModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModuleModal();
+            }
+        });
 
         function filterByModule(module) {
             if (selectedModules.includes(module)) {
@@ -1860,7 +2451,6 @@
 
         function applyFilters() {
             const searchTerm = document.getElementById('trustSearch').value.toLowerCase();
-            const moduleFilter = document.getElementById('moduleFilter').value;
 
             filteredTrusts = TRUST_TYPES.filter(trust => {
                 // Text search
@@ -1932,6 +2522,8 @@
 
         // Make filterByModule available globally
         window.filterByModule = filterByModule;
+        window.closeModuleModal = closeModuleModal;
+        window.applyModuleFilterFromModal = applyModuleFilterFromModal;
 
         // Glossary toggle function
         window.toggleGlossary = function() {
@@ -2033,14 +2625,792 @@
             renderComparison();
         };
 
+        // MVP Module Analysis
+        function renderMVPAnalysis() {
+            const container = document.getElementById('mvpAnalysis');
+            if (!container) return;
+
+            // Count how many trusts have each module
+            const moduleCounts = {};
+            ALL_MODULES.forEach(module => {
+                moduleCounts[module] = TRUST_TYPES.filter(trust => {
+                    return Object.values(trust.modules).some(moduleArray => moduleArray.includes(module));
+                }).length;
+            });
+
+            // Sort by count descending
+            const sortedModules = Object.entries(moduleCounts).sort((a, b) => b[1] - a[1]);
+            const totalTrusts = TRUST_TYPES.length;
+
+            // Top 5 modules = MVP
+            const mvpModules = sortedModules.slice(0, 5).map(([module]) => module);
+
+            // Calculate coverage at different module counts
+            const coverageLevels = [
+                { name: 'MVP (Top 5 Modules)', count: 5, modules: mvpModules },
+                { name: 'Top 10 Modules', count: 10, modules: sortedModules.slice(0, 10).map(([m]) => m) },
+                { name: 'Top 15 Modules', count: 15, modules: sortedModules.slice(0, 15).map(([m]) => m) },
+                { name: 'All Modules', count: sortedModules.length, modules: sortedModules.map(([m]) => m) }
+            ];
+
+            // Calculate which trusts are covered by MVP
+            const mvpCoveredTrusts = TRUST_TYPES.filter(trust => {
+                const trustModules = [];
+                Object.values(trust.modules).forEach(moduleArray => {
+                    moduleArray.forEach(mod => trustModules.push(mod));
+                });
+                // Trust is covered if ALL its modules are in MVP
+                return trustModules.length > 0 && trustModules.every(mod => mvpModules.includes(mod));
+            });
+
+            // Calculate partial coverage (trusts that use at least some MVP modules)
+            const mvpPartialTrusts = TRUST_TYPES.filter(trust => {
+                const trustModules = [];
+                Object.values(trust.modules).forEach(moduleArray => {
+                    moduleArray.forEach(mod => trustModules.push(mod));
+                });
+                return trustModules.some(mod => mvpModules.includes(mod)) && 
+                       !trustModules.every(mod => mvpModules.includes(mod));
+            });
+
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-6 rounded-xl border border-blue-500/30 mb-6">
+                    <h4 class="text-lg font-bold text-white mb-4">🎯 MVP Definition: Top 5 Most-Used Modules</h4>
+                    <div class="grid md:grid-cols-5 gap-3 mb-4">
+                        ${mvpModules.map((module, idx) => {
+                            const count = moduleCounts[module];
+                            const percentage = ((count / totalTrusts) * 100).toFixed(0);
+                            return `
+                                <div class="bg-slate-800/50 p-3 rounded-lg border border-cyan-500/30">
+                                    <div class="text-xs text-slate-400 mb-1">#${idx + 1}</div>
+                                    <div class="font-bold text-cyan-400 text-sm mb-1">${module}</div>
+                                    <div class="text-xs text-slate-300">${count}/${totalTrusts} trusts (${percentage}%)</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-slate-800/50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-emerald-400 mb-1">${mvpCoveredTrusts.length}</div>
+                            <div class="text-xs text-slate-300">Fully Covered Trusts</div>
+                            <div class="text-xs text-slate-400 mt-1">All modules in MVP</div>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-cyan-400 mb-1">${mvpPartialTrusts.length}</div>
+                            <div class="text-xs text-slate-300">Partially Covered</div>
+                            <div class="text-xs text-slate-400 mt-1">Some MVP modules</div>
+                        </div>
+                        <div class="bg-slate-800/50 p-4 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-400 mb-1">${((mvpCoveredTrusts.length / totalTrusts) * 100).toFixed(0)}%</div>
+                            <div class="text-xs text-slate-300">Full Coverage Rate</div>
+                            <div class="text-xs text-slate-400 mt-1">With MVP only</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                    <h4 class="text-lg font-bold text-white mb-4">📊 Coverage Analysis by Module Count</h4>
+                    <div class="space-y-4">
+                        ${coverageLevels.map(level => {
+                            const coveredTrusts = TRUST_TYPES.filter(trust => {
+                                const trustModules = [];
+                                Object.values(trust.modules).forEach(moduleArray => {
+                                    moduleArray.forEach(mod => trustModules.push(mod));
+                                });
+                                return trustModules.length > 0 && trustModules.every(mod => level.modules.includes(mod));
+                            });
+                            const coveragePercent = ((coveredTrusts.length / totalTrusts) * 100).toFixed(1);
+                            
+                            return `
+                                <div class="bg-slate-900/50 p-4 rounded-lg border-l-4 ${level.count === 5 ? 'border-cyan-500' : level.count === 10 ? 'border-blue-500' : level.count === 15 ? 'border-purple-500' : 'border-emerald-500'}">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h5 class="font-bold text-white">${level.name}</h5>
+                                        <span class="text-sm font-semibold ${level.count === 5 ? 'text-cyan-400' : level.count === 10 ? 'text-blue-400' : level.count === 15 ? 'text-purple-400' : 'text-emerald-400'}">
+                                            ${coveragePercent}% Coverage
+                                        </span>
+                                    </div>
+                                    <div class="text-sm text-slate-300 mb-2">
+                                        <strong>${coveredTrusts.length}</strong> of <strong>${totalTrusts}</strong> trust types fully supported
+                                    </div>
+                                    ${level.count === 5 ? `
+                                        <div class="mt-3 pt-3 border-t border-slate-700">
+                                            <p class="text-xs font-semibold text-cyan-400 mb-2">Trust Types Covered by MVP:</p>
+                                            <div class="flex flex-wrap gap-2">
+                                                ${mvpCoveredTrusts.slice(0, 10).map(trust => 
+                                                    `<span class="px-2 py-1 bg-cyan-500/20 text-cyan-300 rounded text-xs border border-cyan-500/30">${trust.name}</span>`
+                                                ).join('')}
+                                                ${mvpCoveredTrusts.length > 10 ? `<span class="px-2 py-1 bg-slate-700 text-slate-400 rounded text-xs">+${mvpCoveredTrusts.length - 10} more</span>` : ''}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 p-6 rounded-xl border border-purple-500/30">
+                    <h4 class="text-lg font-bold text-white mb-4">💡 Strategic Insight</h4>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="text-slate-300 mb-2"><strong class="text-purple-400">MVP Approach (Top 5):</strong></p>
+                            <p class="text-slate-400 text-xs">
+                                Building just the top 5 most-used modules provides <strong class="text-white">${((mvpCoveredTrusts.length / totalTrusts) * 100).toFixed(0)}% full coverage</strong> 
+                                of trust types, enabling rapid market entry with minimal development effort.
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-slate-300 mb-2"><strong class="text-pink-400">Incremental Expansion:</strong></p>
+                            <p class="text-slate-400 text-xs">
+                                Each additional module increases coverage. Top 10 modules cover <strong class="text-white">${((TRUST_TYPES.filter(t => {
+                                    const mods = [];
+                                    Object.values(t.modules).forEach(arr => arr.forEach(m => mods.push(m)));
+                                    return mods.length > 0 && mods.every(m => sortedModules.slice(0, 10).map(([m]) => m).includes(m));
+                                }).length / totalTrusts) * 100).toFixed(0)}%</strong> of trust types.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
         // Event listeners
         document.addEventListener('DOMContentLoaded', () => {
             populateModuleFilter();
             renderTrustTypes();
             renderModuleStats();
+            renderMVPAnalysis();
 
             document.getElementById('trustSearch').addEventListener('input', applyFilters);
         });
+
+        // Pitch Deck Generator for Orion Innovation
+        function generatePitchDeck() {
+            const container = document.getElementById('pitchDeckContainer');
+            container.innerHTML = '';
+
+            const pitchSlides = [
+                {
+                    title: 'The Opportunity: Trust Automation for Digital Transformation',
+                    content: `
+                        <div class="space-y-4">
+                            <p class="text-lg text-slate-300 leading-relaxed">
+                                Orion Innovation serves <strong class="text-blue-400">6,000+ associates</strong> across <strong class="text-blue-400">12 delivery centers</strong> worldwide, 
+                                with deep expertise in <strong class="text-cyan-400">Wealth & Asset Management</strong> and <strong class="text-cyan-400">Financial Services</strong>.
+                            </p>
+                            <div class="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-5 rounded-xl border border-blue-500/30">
+                                <h4 class="text-lg font-bold text-white mb-3">🌍 Orion's Global Delivery Centers: Strategic Advantage</h4>
+                                <p class="text-slate-300 text-sm mb-3">
+                                    Orion's <strong class="text-cyan-400">12 delivery centers</strong> are distributed globally to provide:
+                                </p>
+                                <div class="grid md:grid-cols-2 gap-3 text-sm">
+                                    <div>
+                                        <p class="text-slate-300 mb-2"><strong class="text-blue-400">24/7 Operations:</strong></p>
+                                        <p class="text-slate-400 text-xs">Round-the-clock trust administration and monitoring across time zones, ensuring continuous service for global clients.</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-300 mb-2"><strong class="text-cyan-400">Regulatory Expertise:</strong></p>
+                                        <p class="text-slate-400 text-xs">Local knowledge of trust laws, tax regulations, and compliance requirements in multiple jurisdictions.</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-300 mb-2"><strong class="text-purple-400">Scalability:</strong></p>
+                                        <p class="text-slate-400 text-xs">Distributed workforce enables rapid scaling of trust operations without geographic constraints.</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-slate-300 mb-2"><strong class="text-emerald-400">Risk Diversification:</strong></p>
+                                        <p class="text-slate-400 text-xs">Redundant operations across centers ensure business continuity and disaster recovery capabilities.</p>
+                                    </div>
+                                </div>
+                                <p class="text-slate-300 text-sm mt-4">
+                                    <strong class="text-white">Why This Matters for Trust Automation:</strong> Our platform can leverage Orion's existing delivery center infrastructure 
+                                    to provide <strong class="text-cyan-400">localized trust services</strong> with <strong class="text-cyan-400">global consistency</strong>, enabling 
+                                    enterprise clients to manage trusts across multiple jurisdictions through a single automated system.
+                                </p>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-blue-500">
+                                <p class="text-slate-300">
+                                    <strong class="text-white">The Challenge:</strong> Trust creation and management remains manual, time-intensive, and error-prone, 
+                                    limiting scalability for Orion's enterprise clients managing billions in assets.
+                                </p>
+                            </div>
+                            <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-cyan-500">
+                                <p class="text-slate-300">
+                                    <strong class="text-white">The Solution:</strong> Automated trust creation and execution platform that integrates with 
+                                    Orion's existing <strong class="text-cyan-400">Cloud & Infrastructure</strong> and <strong class="text-cyan-400">Data & Analytics</strong> capabilities.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Why Orion Innovation Needs Trust Automation',
+                    content: `
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-slate-800/50 p-5 rounded-lg border border-slate-700">
+                                <h4 class="text-lg font-bold text-blue-400 mb-3">💰 Market Opportunity</h4>
+                                <ul class="space-y-2 text-slate-300 text-sm">
+                                    <li>• <strong>$5T+</strong> in US trust assets</li>
+                                    <li>• Only <strong>2%</strong> of US adults have trusts</li>
+                                    <li>• Growing demand for <strong>digital wealth management</strong></li>
+                                    <li>• Orion's FinTech clients need scalable solutions</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-5 rounded-lg border border-slate-700">
+                                <h4 class="text-lg font-bold text-cyan-400 mb-3">🚀 Competitive Advantage</h4>
+                                <ul class="space-y-2 text-slate-300 text-sm">
+                                    <li>• Differentiate in <strong>Wealth & Asset Management</strong></li>
+                                    <li>• Leverage Orion's <strong>30+ years</strong> of expertise</li>
+                                    <li>• Integrate with existing <strong>Cloud & Data</strong> platforms</li>
+                                    <li>• Enable <strong>Generative AI</strong> for trust recommendations</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-5 rounded-lg border border-slate-700">
+                                <h4 class="text-lg font-bold text-purple-400 mb-3">⚡ Operational Efficiency</h4>
+                                <ul class="space-y-2 text-slate-300 text-sm">
+                                    <li>• Reduce trust setup time from <strong>weeks to hours</strong></li>
+                                    <li>• Eliminate manual errors in trust documentation</li>
+                                    <li>• Scale trust services across <strong>12 delivery centers</strong> with 24/7 global operations</li>
+                                    <li>• Enable real-time compliance monitoring</li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-5 rounded-lg border border-slate-700">
+                                <h4 class="text-lg font-bold text-emerald-400 mb-3">🔒 Risk Mitigation</h4>
+                                <ul class="space-y-2 text-slate-300 text-sm">
+                                    <li>• Automated compliance with <strong>IRS regulations</strong></li>
+                                    <li>• Built-in <strong>Cybersecurity</strong> best practices</li>
+                                    <li>• Audit trails for regulatory requirements</li>
+                                    <li>• Integration with Orion's <strong>Security Operations</strong></li>
+                                </ul>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Addressing Real Advisor Feedback & Pain Points',
+                    content: `
+                        <div class="space-y-6">
+                            <p class="text-lg text-slate-300 leading-relaxed mb-4">
+                                Based on industry feedback from wealth management advisors and trust administrators, here are the most common pain points with existing trust software and manual processes, and how our automation suite addresses them:
+                            </p>
+                            
+                            <div class="space-y-4">
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-red-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-red-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😤</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "Trust setup takes weeks of manual paperwork"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "We spend 2-3 weeks just gathering documents, filling out forms, and coordinating with attorneys. Clients get frustrated with the delays."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Automated trust creation reduces setup from <strong class="text-white">weeks to hours</strong>. Our rules framework auto-generates all required documentation (trust agreements, Crummey notices, regulatory filings) based on client inputs. Integration with Orion's <strong class="text-cyan-400">Data & Analytics</strong> platforms pre-populates client information, eliminating redundant data entry.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-orange-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-orange-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😰</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "Too many errors in manual trust administration"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "We've had compliance issues because manual processes miss required notices, miscalculate distributions, or fail to track deadlines. One mistake can cost thousands in penalties."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Built-in compliance engine validates all trust actions against IRS regulations and state requirements in real-time. Automated deadline tracking and reminders prevent missed distributions, premium payments, or tax filings. Our <strong class="text-cyan-400">Rules Framework Testing</strong> phase ensures 100% accuracy before money movement, eliminating costly errors.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-yellow-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-yellow-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😓</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "Can't scale trust services - each one requires too much manual oversight"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "We're turning away clients because we don't have the staff to manage more trusts. Each trust needs constant attention for distributions, tax reporting, and compliance monitoring."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Automated lifecycle management handles routine trust administration tasks (distributions, premium payments, compliance checks) without manual intervention. Leverages Orion's <strong class="text-cyan-400">12 delivery centers</strong> for 24/7 monitoring and support. One advisor can now manage <strong class="text-white">10x more trusts</strong> with the same effort, enabling rapid scaling.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-purple-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😕</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "Existing software doesn't handle alternative assets like real estate"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "Our clients want to put commercial real estate and private equity in trusts, but current systems only handle stocks and bonds. We're doing manual workarounds that are error-prone."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Our rules framework natively supports alternative assets (real estate, private equity, art, crypto) with automated valuation tracking, rental income management, and distribution calculations. Integration with Orion's <strong class="text-cyan-400">Data & Analytics</strong> platforms provides real-time asset valuations and performance tracking for all asset types.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-pink-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😟</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "No visibility into trust performance and compliance status"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "We can't easily see which trusts need attention, which are compliant, or how they're performing. We're flying blind until something goes wrong."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Real-time dashboards powered by Orion's <strong class="text-cyan-400">Data & Analytics</strong> show trust performance, compliance status, upcoming deadlines, and tax benefits across all trusts. Automated alerts notify advisors of issues before they become problems. Full audit trails for regulatory requirements.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-indigo-500">
+                                    <div class="flex items-start gap-4">
+                                        <div class="flex-shrink-0">
+                                            <div class="w-12 h-12 rounded-full bg-indigo-500/20 flex items-center justify-center">
+                                                <span class="text-2xl">😤</span>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="text-lg font-bold text-white mb-2">Advisor Complaint: "Integration with existing systems is a nightmare"</h4>
+                                            <p class="text-sm text-slate-400 mb-3 italic">
+                                                "We have client data in CRM, portfolio data in another system, and trust info in spreadsheets. Nothing talks to each other, so we're constantly re-entering data and risking errors."
+                                            </p>
+                                            <div class="bg-slate-900/50 p-3 rounded border border-cyan-500/30">
+                                                <p class="text-sm text-cyan-300 font-semibold mb-1">Our Solution:</p>
+                                                <p class="text-sm text-slate-300">
+                                                    Built on Orion's <strong class="text-cyan-400">Cloud & Infrastructure</strong> and <strong class="text-cyan-400">Enterprise Platforms</strong>, our platform integrates seamlessly with existing systems via APIs. The <strong class="text-white">Data Layer Migration</strong> phase (Phase 1) normalizes data from multiple sources into a unified rules framework, eliminating silos and redundant data entry.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="bg-gradient-to-r from-emerald-600/20 to-cyan-600/20 p-6 rounded-xl border border-emerald-500/30 mt-6">
+                                <h4 class="text-lg font-bold text-white mb-3">💡 Key Takeaway</h4>
+                                <p class="text-slate-300 text-sm">
+                                    Our automation suite directly addresses the most critical pain points advisors face daily. By automating manual processes, ensuring compliance, and providing real-time visibility, we transform trust administration from a time-consuming burden into a scalable, efficient service that enables advisors to serve more clients with less effort.
+                                </p>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Our Automated Trust Solution: Three-Phase Architecture',
+                    content: `
+                        <div class="space-y-6">
+                            <div class="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-6 rounded-xl border border-blue-500/30">
+                                <h4 class="text-xl font-bold text-white mb-4">Platform Architecture</h4>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div class="bg-slate-800/50 p-4 rounded-lg border border-blue-500/30">
+                                        <h5 class="font-semibold text-blue-400 mb-2">📊 Phase 1: Data Layer</h5>
+                                        <p class="text-sm text-slate-300 mb-2">
+                                            Unified rules framework that ingests and normalizes existing trust data from multiple sources.
+                                        </p>
+                                        <ul class="text-xs text-slate-400 space-y-1 mt-2">
+                                            <li>• Legacy trust migration</li>
+                                            <li>• Data normalization</li>
+                                            <li>• Rules framework mapping</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-slate-800/50 p-4 rounded-lg border border-cyan-500/30">
+                                        <h5 class="font-semibold text-cyan-400 mb-2">⚙️ Phase 2: Rules Engine</h5>
+                                        <p class="text-sm text-slate-300 mb-2">
+                                            Intelligent rules framework that interprets trust terms, validates compliance, and executes logic.
+                                        </p>
+                                        <ul class="text-xs text-slate-400 space-y-1 mt-2">
+                                            <li>• Trust type interpretation</li>
+                                            <li>• Compliance validation</li>
+                                            <li>• Automated testing</li>
+                                        </ul>
+                                    </div>
+                                    <div class="bg-slate-800/50 p-4 rounded-lg border border-purple-500/30">
+                                        <h5 class="font-semibold text-purple-400 mb-2">💰 Phase 3: Money Movement</h5>
+                                        <p class="text-sm text-slate-300 mb-2">
+                                            Secure integration layer connecting rules engine to payment systems and banking infrastructure.
+                                        </p>
+                                        <ul class="text-xs text-slate-400 space-y-1 mt-2">
+                                            <li>• Payment processing</li>
+                                            <li>• Distribution automation</li>
+                                            <li>• Transaction monitoring</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-slate-800/50 p-5 rounded-lg">
+                                <h5 class="font-semibold text-white mb-3">🔗 Integration with Orion's Tech Stack</h5>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <h6 class="text-sm font-semibold text-cyan-400 mb-2">Phase 1 & 2 Integration</h6>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs border border-blue-500/30">Cloud & Infrastructure</span>
+                                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs border border-cyan-500/30">Data & Analytics</span>
+                                            <span class="px-3 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs border border-purple-500/30">Generative AI</span>
+                                            <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 rounded-full text-xs border border-emerald-500/30">Cybersecurity</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h6 class="text-sm font-semibold text-purple-400 mb-2">Phase 3 Integration</h6>
+                                        <div class="flex flex-wrap gap-2">
+                                            <span class="px-3 py-1 bg-pink-500/20 text-pink-300 rounded-full text-xs border border-pink-500/30">Enterprise Platforms</span>
+                                            <span class="px-3 py-1 bg-blue-500/20 text-blue-300 rounded-full text-xs border border-blue-500/30">Payment APIs</span>
+                                            <span class="px-3 py-1 bg-cyan-500/20 text-cyan-300 rounded-full text-xs border border-cyan-500/30">Real-time Monitoring</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bg-gradient-to-r from-slate-800/50 to-slate-700/50 p-4 rounded-lg">
+                                <h5 class="font-semibold text-white mb-2">🎯 Key Capabilities</h5>
+                                <div class="grid md:grid-cols-2 gap-3 text-sm text-slate-300">
+                                    <div class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span><strong>25+ trust types</strong> supported with modular rules framework</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span><strong>Automated compliance</strong> validation (IRS, state regulations)</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span><strong>Real-time monitoring</strong> and audit trails for all transactions</span>
+                                    </div>
+                                    <div class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span><strong>Scalable architecture</strong> across 12 delivery centers</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Business Value for Orion Innovation',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-t-4 border-blue-500">
+                                    <div class="text-3xl font-bold text-blue-400 mb-2">10x</div>
+                                    <p class="text-sm text-slate-300">Faster trust creation</p>
+                                    <p class="text-xs text-slate-400 mt-2">From weeks to hours, enabling rapid client onboarding</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-t-4 border-cyan-500">
+                                    <div class="text-3xl font-bold text-cyan-400 mb-2">90%</div>
+                                    <p class="text-sm text-slate-300">Reduction in errors</p>
+                                    <p class="text-xs text-slate-400 mt-2">Automated compliance checks eliminate manual mistakes</p>
+                                </div>
+                                <div class="bg-slate-800/50 p-5 rounded-lg border-t-4 border-purple-500">
+                                    <div class="text-3xl font-bold text-purple-400 mb-2">$2M+</div>
+                                    <p class="text-sm text-slate-300">Annual cost savings</p>
+                                    <p class="text-xs text-slate-400 mt-2">Per enterprise client through operational efficiency</p>
+                                </div>
+                            </div>
+                            <div class="bg-gradient-to-r from-slate-800/50 to-slate-700/50 p-6 rounded-xl">
+                                <h4 class="text-lg font-bold text-white mb-4">Revenue Opportunities</h4>
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">New Service Line</h5>
+                                        <p class="text-sm text-slate-300">
+                                            Offer trust automation as a premium service to Wealth & Asset Management clients, 
+                                            creating a new recurring revenue stream.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Platform Licensing</h5>
+                                        <p class="text-sm text-slate-300">
+                                            License the platform to other financial institutions, leveraging Orion's 
+                                            <strong class="text-white">Platforms & IP</strong> expertise.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Upsell Existing Clients</h5>
+                                        <p class="text-sm text-slate-300">
+                                            Enhance existing <strong class="text-white">Cloud & Infrastructure</strong> and 
+                                            <strong class="text-white">Data & Analytics</strong> engagements with trust automation.
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Market Expansion</h5>
+                                        <p class="text-sm text-slate-300">
+                                            Enter the underserved middle-market segment (only 2% adoption), 
+                                            opening a massive new market opportunity.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Three-Phase Implementation Roadmap',
+                    content: `
+                        <div class="space-y-4">
+                            <div class="bg-slate-800/30 p-4 rounded-lg border border-slate-700 mb-6">
+                                <p class="text-slate-300 text-sm">
+                                    Our phased approach minimizes risk while delivering incremental value. Each phase builds on the previous, 
+                                    ensuring a solid foundation before moving to production money movement.
+                                </p>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-cyan-500 to-purple-500"></div>
+                                <div class="space-y-6 pl-12">
+                                    <div class="relative">
+                                        <div class="absolute -left-8 w-4 h-4 bg-blue-500 rounded-full border-2 border-slate-900"></div>
+                                        <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-blue-500">
+                                            <h5 class="font-bold text-white mb-3 text-lg">Phase 1: Data Layer Migration</h5>
+                                            <p class="text-sm text-slate-400 mb-3">Migrate existing trusts into our rules framework</p>
+                                            <ul class="text-sm text-slate-300 space-y-2">
+                                                <li class="flex items-start">
+                                                    <span class="text-blue-400 mr-2">•</span>
+                                                    <span>Extract and normalize trust data from Orion's existing <strong class="text-cyan-400">Data & Analytics</strong> systems</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-blue-400 mr-2">•</span>
+                                                    <span>Map legacy trust structures to our modular rules framework (25+ trust types)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-blue-400 mr-2">•</span>
+                                                    <span>Build data migration pipelines leveraging Orion's <strong class="text-blue-400">Cloud & Infrastructure</strong> capabilities</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-blue-400 mr-2">•</span>
+                                                    <span>Create unified data model for all trust types across client portfolios</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-blue-400 mr-2">•</span>
+                                                    <span>Implement data validation and quality checks with Orion's <strong class="text-emerald-400">Cybersecurity</strong> standards</span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4 pt-3 border-t border-slate-700">
+                                                <p class="text-xs text-slate-400"><strong class="text-white">Deliverable:</strong> All existing trusts migrated and accessible through rules framework</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute -left-8 w-4 h-4 bg-cyan-500 rounded-full border-2 border-slate-900"></div>
+                                        <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-cyan-500">
+                                            <h5 class="font-bold text-white mb-3 text-lg">Phase 2: Rules Framework Testing</h5>
+                                            <p class="text-sm text-slate-400 mb-3">Validate rules engine accuracy and compliance</p>
+                                            <ul class="text-sm text-slate-300 space-y-2">
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Test rules engine against migrated trust data to ensure accurate interpretation</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Validate compliance rules (IRS regulations, state requirements, tax calculations)</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Run parallel processing: rules engine vs. manual trust administration</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Integrate with Orion's <strong class="text-purple-400">Generative AI</strong> for trust recommendations and validation</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Build comprehensive test suite covering all trust types and edge cases</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-cyan-400 mr-2">•</span>
+                                                    <span>Pilot with select Wealth & Asset Management clients in sandbox environment</span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4 pt-3 border-t border-slate-700">
+                                                <p class="text-xs text-slate-400"><strong class="text-white">Deliverable:</strong> Validated, tested rules engine ready for production money movement</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="relative">
+                                        <div class="absolute -left-8 w-4 h-4 bg-purple-500 rounded-full border-2 border-slate-900"></div>
+                                        <div class="bg-slate-800/50 p-5 rounded-lg border-l-4 border-purple-500">
+                                            <h5 class="font-bold text-white mb-3 text-lg">Phase 3: Money Movement Integration</h5>
+                                            <p class="text-sm text-slate-400 mb-3">Connect rules engine to actual financial transactions</p>
+                                            <ul class="text-sm text-slate-300 space-y-2">
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Integrate rules engine with payment systems and banking APIs</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Connect to Orion's existing <strong class="text-blue-400">Cloud & Infrastructure</strong> for secure transaction processing</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Implement automated distributions, premium payments, and asset transfers</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Build real-time monitoring and alerting using Orion's <strong class="text-cyan-400">Data & Analytics</strong> platforms</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Deploy across all <strong class="text-cyan-400">12 delivery centers</strong> with full audit trails</span>
+                                                </li>
+                                                <li class="flex items-start">
+                                                    <span class="text-purple-400 mr-2">•</span>
+                                                    <span>Launch as production service for Wealth & Asset Management clients</span>
+                                                </li>
+                                            </ul>
+                                            <div class="mt-4 pt-3 border-t border-slate-700">
+                                                <p class="text-xs text-slate-400"><strong class="text-white">Deliverable:</strong> Fully automated trust execution with end-to-end money movement</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 bg-gradient-to-r from-blue-600/20 to-purple-600/20 p-6 rounded-xl border border-blue-500/30">
+                                <h4 class="text-lg font-bold text-white mb-4">Risk Mitigation Strategy</h4>
+                                <div class="grid md:grid-cols-3 gap-4">
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Phase 1 Safety</h5>
+                                        <p class="text-xs text-slate-300">Read-only data migration, no impact on existing operations</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Phase 2 Safety</h5>
+                                        <p class="text-xs text-slate-300">Sandbox testing environment, parallel validation with manual processes</p>
+                                    </div>
+                                    <div>
+                                        <h5 class="font-semibold text-cyan-400 mb-2">Phase 3 Safety</h5>
+                                        <p class="text-xs text-slate-300">Gradual rollout with transaction limits, full audit trails, rollback capabilities</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                },
+                {
+                    title: 'Why Partner With Us',
+                    content: `
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                                <h4 class="text-lg font-bold text-white mb-4">🎯 Strategic Alignment</h4>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Complements Orion's <strong class="text-white">Wealth & Asset Management</strong> expertise</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Leverages existing <strong class="text-white">Cloud & Infrastructure</strong> capabilities</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Enhances <strong class="text-white">Data & Analytics</strong> offerings with trust insights</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Integrates with Orion's <strong class="text-white">Generative AI</strong> initiatives</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-800/50 p-6 rounded-xl border border-slate-700">
+                                <h4 class="text-lg font-bold text-white mb-4">💼 Market Position</h4>
+                                <ul class="space-y-3 text-slate-300">
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>First-mover advantage in automated trust creation</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Addresses $5T+ market with only 2% penetration</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Differentiates Orion in competitive FinTech space</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="text-cyan-400 mr-2">✓</span>
+                                        <span>Creates new <strong class="text-white">Platforms & IP</strong> asset for Orion</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-6 bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-6 rounded-xl border border-blue-500/30">
+                            <h4 class="text-lg font-bold text-white mb-3">🚀 Next Steps</h4>
+                            <div class="grid md:grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-cyan-400 mb-2">1</div>
+                                    <p class="text-sm text-slate-300">Proof of Concept with select client</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-cyan-400 mb-2">2</div>
+                                    <p class="text-sm text-slate-300">Pilot program across 2-3 delivery centers</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold text-cyan-400 mb-2">3</div>
+                                    <p class="text-sm text-slate-300">Full deployment and market launch</p>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }
+            ];
+
+            pitchSlides.forEach((slide, index) => {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = 'glass-panel p-8 rounded-xl';
+                slideDiv.innerHTML = `
+                    <div class="flex items-center gap-3 mb-6">
+                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center font-bold text-white">
+                            ${index + 1}
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">${slide.title}</h3>
+                    </div>
+                    <div class="prose prose-invert max-w-none">
+                        ${slide.content}
+                    </div>
+                `;
+                container.appendChild(slideDiv);
+            });
+
+            // Scroll to the pitch deck section
+            document.getElementById('pitch-deck').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Make function globally available
+        window.generatePitchDeck = generatePitchDeck;
     </script>
 </body>
 </html>
