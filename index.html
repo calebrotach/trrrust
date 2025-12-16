@@ -355,7 +355,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-2xl font-extrabold tracking-tight"><span class="text-blue-500">TRUSTED</span><span class="text-cyan-400">RESEARCH</span></span>
+                    <a href="#" class="text-2xl font-extrabold tracking-tight hover:opacity-80 transition cursor-pointer"><span class="text-blue-500">TRUSTED</span><span class="text-cyan-400">RESEARCH</span></a>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
@@ -995,7 +995,12 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2">Search Trust Types</label>
-                        <input type="text" id="trustSearch" placeholder="Type to search (e.g., GRAT, Revocable, Charitable)" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white placeholder-slate-500 focus:ring-blue-500 focus:border-blue-500 border border-slate-600">
+                        <div class="relative">
+                            <input type="text" id="trustSearch" placeholder="Type to search (e.g., GRAT, Revocable, Charitable)" class="w-full px-4 py-2 rounded-lg bg-slate-700/50 text-slate-500 placeholder-slate-500 border border-slate-600 cursor-not-allowed" disabled>
+                            <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <span class="text-sm text-slate-400 bg-slate-800/90 px-3 py-1 rounded">Coming Soon</span>
+                            </div>
+                        </div>
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2">Filter by Modules</label>
@@ -2764,10 +2769,11 @@ flowchart TD
         }
 
         function applyFilters() {
-            const searchTerm = document.getElementById('trustSearch').value.toLowerCase();
+            // Search functionality disabled - coming soon
+            const searchTerm = ''; // document.getElementById('trustSearch').value.toLowerCase();
 
             filteredTrusts = TRUST_TYPES.filter(trust => {
-                // Text search
+                // Text search (disabled)
                 const matchesSearch = !searchTerm || 
                     trust.name.toLowerCase().includes(searchTerm) ||
                     trust.description.toLowerCase().includes(searchTerm) ||
@@ -3204,7 +3210,8 @@ flowchart TD
             renderModuleStats();
             renderMVPAnalysis();
 
-            document.getElementById('trustSearch').addEventListener('input', applyFilters);
+            // Search functionality disabled - coming soon
+            // document.getElementById('trustSearch').addEventListener('input', applyFilters);
         });
 
         // Pitch Deck Generator for Orion Innovation
