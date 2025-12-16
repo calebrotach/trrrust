@@ -8,6 +8,54 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Mermaid.js for flowcharts -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: false,
+            theme: 'dark',
+            themeVariables: {
+                primaryColor: '#1e293b',
+                primaryTextColor: '#f8fafc',
+                primaryBorderColor: '#3b82f6',
+                lineColor: '#06b6d4',
+                secondaryColor: '#0f172a',
+                tertiaryColor: '#1e293b',
+                background: '#0f172a',
+                mainBkg: '#1e293b',
+                secondBkg: '#0f172a',
+                textColor: '#f8fafc',
+                border1: '#3b82f6',
+                border2: '#06b6d4',
+                arrowheadColor: '#3b82f6',
+                clusterBkg: '#1e293b',
+                clusterBorder: '#3b82f6',
+                defaultLinkColor: '#06b6d4',
+                titleColor: '#f8fafc',
+                edgeLabelBackground: '#1e293b',
+                actorBorder: '#3b82f6',
+                actorBkg: '#1e293b',
+                actorTextColor: '#f8fafc',
+                actorLineColor: '#06b6d4',
+                signalColor: '#f8fafc',
+                signalTextColor: '#f8fafc',
+                labelBoxBkgColor: '#1e293b',
+                labelBoxBorderColor: '#3b82f6',
+                labelTextColor: '#f8fafc',
+                loopTextColor: '#f8fafc',
+                noteBorderColor: '#8b5cf6',
+                noteBkgColor: '#1e293b',
+                noteTextColor: '#f8fafc',
+                activationBorderColor: '#06b6d4',
+                activationBkgColor: '#1e293b',
+                sequenceNumberColor: '#f8fafc',
+                sectionBkgColor: '#1e293b',
+                altBkgColor: '#0f172a',
+                altBorderColor: '#3b82f6'
+            }
+        });
+        window.mermaid = mermaid;
+    </script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
@@ -27,6 +75,20 @@
             font-family: 'Inter', sans-serif;
             background-color: #0f172a;
             color: #f8fafc;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Section summary links */
+        #summaries a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        #summaries a:hover {
+            transform: translateY(-2px);
         }
         
         /* Custom Scrollbar */
@@ -245,6 +307,30 @@
         .flow-timeline::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg, #06b6d4, #3b82f6);
         }
+        
+        /* Mermaid Diagram Styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+        
+        .mermaid {
+            background: transparent;
+            max-width: 100%;
+        }
+        
+        .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+        
+        /* Ensure Mermaid text is visible */
+        .mermaid .nodeLabel,
+        .mermaid .edgeLabel {
+            color: #f8fafc !important;
+        }
     </style>
     <!-- 
         HTML COMMENT: Source Material Analysis & Plan
@@ -269,17 +355,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-2xl font-extrabold tracking-tight"><span class="text-blue-500">TRUST</span><span class="text-cyan-400">METRICS</span></span>
+                    <span class="text-2xl font-extrabold tracking-tight"><span class="text-blue-500">TRUSTED</span><span class="text-cyan-400">RESEARCH</span></span>
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
                         <a href="#anatomy" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Anatomy</a>
                         <a href="#adoption" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Adoption</a>
                         <a href="#assets" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Alt Assets</a>
-                        <a href="#tools" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">LLM Tools</a>
                         <a href="#example" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Example</a>
                         <a href="#trust-types" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Trust Types</a>
                         <a href="#pitch-deck" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">Pitch Deck</a>
+                        <a href="#mvp-analysis" class="hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition">MVP Analysis</a>
                     </div>
                 </div>
             </div>
@@ -291,10 +377,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
             <div class="text-center">
                 <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4">
-                    Demystifying <span class="gradient-text">Trusts</span>
+                    Getting to <span class="gradient-text">MVP</span>
                 </h1>
                 <p class="mt-4 max-w-2xl mx-auto text-xl text-slate-400">
-                    Trusts are not just for the ultra-wealthy. They are the "chameleons" of finance—adaptable legal structures designed to protect assets, bypass probate, and manage tax liability.
+                    Dissecting trusts into modular components and building a minimum viable product from comprehensive research.
                 </p>
                 <div class="mt-8 flex justify-center gap-4">
                     <div class="bg-slate-800 p-4 rounded-lg shadow-lg border border-slate-700 text-center w-32">
@@ -324,62 +410,55 @@
                 </p>
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="glass-panel p-5 rounded-xl hover:border-blue-500 transition border border-slate-700">
+                <a href="#anatomy" class="glass-panel p-5 rounded-xl hover:border-blue-500 transition border border-slate-700 block cursor-pointer">
                     <div class="text-2xl font-bold text-blue-400 mb-2">1. Anatomy</div>
                     <p class="text-sm text-slate-300 mb-2">The DNA of Every Trust</p>
                     <p class="text-xs text-slate-400">
                         Explains the fundamental tripartite structure: Grantor, Trustee, and Beneficiary. Uses a visual diagram to show how legal title and equitable title are split, and clarifies common confusions about hedge funds, REITs, and governance structures.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-cyan-500 transition border border-slate-700">
+                </a>
+                <a href="#adoption" class="glass-panel p-5 rounded-xl hover:border-cyan-500 transition border border-slate-700 block cursor-pointer">
                     <div class="text-2xl font-bold text-cyan-400 mb-2">2. Adoption</div>
                     <p class="text-sm text-slate-300 mb-2">Usage & The Wealth Gap</p>
                     <p class="text-xs text-slate-400">
                         Visualizes trust adoption rates by net worth, revealing a significant wealth gap. Shows that only 2% of US adults have trusts despite $5T+ in trust assets, and identifies key barriers preventing broader adoption including misconceptions and legal costs.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-purple-500 transition border border-slate-700">
+                </a>
+                <a href="#assets" class="glass-panel p-5 rounded-xl hover:border-purple-500 transition border border-slate-700 block cursor-pointer">
                     <div class="text-2xl font-bold text-purple-400 mb-2">3. Alt Assets</div>
                     <p class="text-sm text-slate-300 mb-2">The Asset Evolution</p>
                     <p class="text-xs text-slate-400">
                         Examines the shift from traditional portfolios (stocks, bonds) to alternative assets (real estate, crypto, private equity) in modern trusts. Highlights challenges: custody, liquidity, and valuation requirements that make alternative assets complex to manage in trusts.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-pink-500 transition border border-slate-700">
-                    <div class="text-2xl font-bold text-pink-400 mb-2">4. LLM Tools</div>
-                    <p class="text-sm text-slate-300 mb-2">Trust Analyst Tools</p>
-                    <p class="text-xs text-slate-400">
-                        Interactive AI-powered tools using Generative AI: (1) Trust Definition Generator - explains any trust type with concise breakdowns, (2) Regulatory Insight - provides web-grounded summaries of latest regulatory changes affecting alternative assets in trusts.
-                    </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-emerald-500 transition border border-slate-700">
-                    <div class="text-2xl font-bold text-emerald-400 mb-2">5. Example</div>
+                </a>
+                <a href="#example" class="glass-panel p-5 rounded-xl hover:border-emerald-500 transition border border-slate-700 block cursor-pointer">
+                    <div class="text-2xl font-bold text-emerald-400 mb-2">4. Example</div>
                     <p class="text-sm text-slate-300 mb-2">Trust in Action</p>
                     <p class="text-xs text-slate-400">
                         Interactive visual diagram showing how trust components interact in real-world examples (ILIT, Revocable Living Trust, GRAT, CRT). Includes responsive flowcharts with step-by-step processes, module breakdowns, and examples featuring alternative assets like real estate and private equity.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-yellow-500 transition border border-slate-700">
-                    <div class="text-2xl font-bold text-yellow-400 mb-2">6. Trust Types</div>
+                </a>
+                <a href="#trust-types" class="glass-panel p-5 rounded-xl hover:border-yellow-500 transition border border-slate-700 block cursor-pointer">
+                    <div class="text-2xl font-bold text-yellow-400 mb-2">5. Trust Types</div>
                     <p class="text-sm text-slate-300 mb-2">Modular Analysis</p>
                     <p class="text-xs text-slate-400">
-                        Comprehensive database of 25+ trust types with modular categorization. Features search, filtering by modules, usage statistics, and MVP analysis showing which modules need to be built to serve various percentages of popular trusts. Click statistics to see which trusts use each module.
+                        Comprehensive database of 25+ trust types with modular categorization. Features search, filtering by modules, usage statistics. Click statistics to see which trusts use each module.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-indigo-500 transition border border-slate-700">
-                    <div class="text-2xl font-bold text-indigo-400 mb-2">7. Pitch Deck</div>
+                </a>
+                <a href="#pitch-deck" class="glass-panel p-5 rounded-xl hover:border-indigo-500 transition border border-slate-700 block cursor-pointer">
+                    <div class="text-2xl font-bold text-indigo-400 mb-2">6. Pitch Deck</div>
                     <p class="text-sm text-slate-300 mb-2">Orion Innovation</p>
                     <p class="text-xs text-slate-400">
                         Customized pitch deck for automating trust creation and execution, tailored to Orion Innovation's digital transformation expertise. Covers three-phase implementation (Data Layer, Rules Framework Testing, Money Movement), business value, and how Orion's 12 global delivery centers provide strategic advantage.
                     </p>
-                </div>
-                <div class="glass-panel p-5 rounded-xl hover:border-rose-500 transition border border-slate-700">
-                    <div class="text-2xl font-bold text-rose-400 mb-2">MVP Analysis</div>
+                </a>
+                <a href="#mvp-analysis" class="glass-panel p-5 rounded-xl hover:border-rose-500 transition border border-slate-700 block cursor-pointer">
+                    <div class="text-2xl font-bold text-rose-400 mb-2">7. MVP Analysis</div>
                     <p class="text-sm text-slate-300 mb-2">Building the Foundation</p>
                     <p class="text-xs text-slate-400">
-                        Calculates which modules need to be built to serve various percentages of popular trusts. Defines MVP as top 5 most-used modules and shows which trust types would be covered. Includes coverage analysis at different module counts (5, 10, 15, all) with strategic insights for development prioritization.
+                        Calculates which modules need to be built to serve various percentages of popular trusts. Defines MVP as top 8 most-used modules and shows which trust types would be covered. Includes coverage analysis at different module counts (8, 10, 15, all) with strategic insights for development prioritization.
                     </p>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -394,60 +473,93 @@
                 </p>
             </div>
 
-            <!-- CSS Diagram: The Trust Triangle -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <div class="glass-panel p-8 rounded-2xl relative overflow-hidden min-h-[400px] flex flex-col justify-center">
-                    <!-- Grantor -->
-                    <div class="flex justify-center mb-8">
-                        <div class="bg-blue-600/20 border border-blue-500 p-4 rounded-xl text-center w-48 z-10">
-                            <h3 class="font-bold text-blue-400">The Grantor</h3>
-                            <p class="text-xs text-slate-300">Creator & Funder</p>
+            <!-- CSS Diagram: The Trust Flow (Full Width with Examples) -->
+            <div class="glass-panel p-8 lg:p-12 rounded-2xl relative overflow-hidden">
+                <!-- Vertical Flow Diagram -->
+                <div class="flex flex-col items-center space-y-8 lg:space-y-10 relative max-w-4xl mx-auto">
+                    <!-- Grantor (Top) -->
+                    <div class="bg-blue-600/20 border-2 border-blue-500 p-6 lg:p-8 rounded-xl text-center w-full max-w-md z-10 shadow-lg shadow-blue-500/20">
+                        <h3 class="font-bold text-blue-400 text-xl lg:text-2xl mb-2">The Grantor</h3>
+                        <p class="text-sm text-slate-300 mb-4">Creator & Funder</p>
+                        <div class="mt-4 pt-4 border-t border-blue-500/30">
+                            <p class="text-xs text-blue-300 font-semibold mb-2">Example Actions:</p>
+                            <div class="space-y-1 text-xs text-slate-300">
+                                <div>• Transfers $2M in stocks, bonds, and real estate</div>
+                                <div>• Funds ILIT with $5M life insurance policy</div>
+                                <div>• Contributes private equity shares to GRAT</div>
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="flex justify-between items-center w-full px-2 md:px-12 relative">
-                        <!-- Connecting Lines (CSS) -->
-                        <div class="absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 -z-0 transform -translate-y-1/2"></div>
-                        
-                        <!-- Trustee -->
-                        <div class="bg-purple-600/20 border border-purple-500 p-4 rounded-xl text-center w-40 z-10 bg-[#0f172a]">
-                            <h3 class="font-bold text-purple-400">The Trustee</h3>
-                            <p class="text-xs text-slate-300">Manager & Fiduciary</p>
-                        </div>
-
-                        <!-- Beneficiary -->
-                        <div class="bg-cyan-600/20 border border-cyan-500 p-4 rounded-xl text-center w-40 z-10 bg-[#0f172a]">
-                            <h3 class="font-bold text-cyan-400">The Beneficiary</h3>
-                            <p class="text-xs text-slate-300">Recipient</p>
-                        </div>
+                    <!-- Arrow Down from Grantor -->
+                    <div class="flex flex-col items-center z-10">
+                        <svg width="50" height="50" viewBox="0 0 50 50" class="text-blue-400">
+                            <path d="M25 0 L25 35 M15 25 L25 35 L35 25" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="text-sm text-slate-300 font-semibold mt-2">Transfers Assets</span>
                     </div>
 
-                    <!-- Assets Flow -->
-                    <div class="mt-8 text-center">
-                        <div class="inline-block bg-slate-700 px-4 py-2 rounded-full text-xs text-slate-300 border border-slate-600">
-                            &darr; The Trust Agreement (The Rulebook) &darr;
+                    <!-- Trust Agreement (Middle) -->
+                    <div class="bg-purple-600/20 border-2 border-purple-500 p-6 lg:p-8 rounded-xl text-center w-full max-w-lg z-10 shadow-lg shadow-purple-500/20">
+                        <h3 class="font-bold text-purple-400 text-xl lg:text-2xl mb-2">📜 Trust Agreement</h3>
+                        <p class="text-sm text-slate-300 mb-4">The Rulebook</p>
+                        <div class="mt-4 pt-4 border-t border-purple-500/30">
+                            <p class="text-xs text-purple-300 font-semibold mb-2">Example Terms:</p>
+                            <div class="space-y-1 text-xs text-slate-300 text-left">
+                                <div>• Distribution rules: "Income to spouse, principal to children at age 25"</div>
+                                <div>• Trustee powers: "May invest in stocks, bonds, real estate, and alternatives"</div>
+                                <div>• Revocability: "Irrevocable trust, grantor retains no control"</div>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="space-y-6">
-                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-blue-500">
-                        <h3 class="text-lg font-bold text-white">Who Holds the Power?</h3>
-                        <p class="text-slate-400 text-sm mt-2">
-                            Unlike a simple bank account, legal title to assets is split. The <strong>Trustee</strong> holds <em>legal title</em> (responsibility), while the <strong>Beneficiary</strong> holds <em>equitable title</em> (enjoyment).
-                        </p>
+                    <!-- Arrow Down from Agreement -->
+                    <div class="flex flex-col items-center z-10">
+                        <svg width="50" height="50" viewBox="0 0 50 50" class="text-purple-400">
+                            <path d="M25 0 L25 35 M15 25 L25 35 L35 25" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="text-sm text-slate-300 font-semibold mt-2">Defines Terms</span>
                     </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-purple-500">
-                        <h3 class="text-lg font-bold text-white">The Hedge Fund Confusion</h3>
-                        <p class="text-slate-400 text-sm mt-2">
-                            <strong>Are Hedge Funds Trusts?</strong> Usually, no. In the US, most are <em>Limited Partnerships (LPs)</em> or LLCs. However, "Unit Trusts" are common in the UK/Australia for mutual funds.
-                        </p>
-                    </div>
-                    <div class="bg-slate-800 p-6 rounded-lg border-l-4 border-cyan-500">
-                        <h3 class="text-lg font-bold text-white">Governance Boards</h3>
-                        <p class="text-slate-400 text-sm mt-2">
-                            <strong>REITs vs. Banks:</strong> Public REITs act like corporations with a Board of Directors. Bank Trust Departments are heavily regulated by the OCC/Fed, adhering to strict fiduciary standards unlike a standard LLC manager.
-                        </p>
+
+                    <!-- Trustee and Beneficiary Side by Side -->
+                    <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-10 w-full justify-center">
+                        <!-- Trustee (Left) -->
+                        <div class="bg-cyan-600/20 border-2 border-cyan-500 p-6 lg:p-8 rounded-xl text-center w-full lg:w-80 z-10 shadow-lg shadow-cyan-500/20">
+                            <h3 class="font-bold text-cyan-400 text-xl lg:text-2xl mb-2">⚖️ The Trustee</h3>
+                            <p class="text-sm text-slate-300 mb-2">Manager & Fiduciary</p>
+                            <p class="text-xs text-cyan-300 font-semibold mb-4">Holds Legal Title</p>
+                            <div class="mt-4 pt-4 border-t border-cyan-500/30">
+                                <p class="text-xs text-cyan-300 font-semibold mb-2">Example Responsibilities:</p>
+                                <div class="space-y-1 text-xs text-slate-300 text-left">
+                                    <div>• Manages portfolio: rebalances quarterly, selects investments</div>
+                                    <div>• Distributes $50K annually to beneficiary per agreement</div>
+                                    <div>• Files tax returns (Form 1041) and maintains records</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Arrow Right from Trustee to Beneficiary -->
+                        <div class="flex flex-col items-center z-10 lg:rotate-0 rotate-90">
+                            <svg width="60" height="40" viewBox="0 0 60 40" class="text-cyan-400">
+                                <path d="M0 20 L45 20 M35 10 L45 20 L35 30" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span class="text-sm text-slate-300 font-semibold mt-2">Manages For</span>
+                        </div>
+
+                        <!-- Beneficiary (Right) -->
+                        <div class="bg-emerald-600/20 border-2 border-emerald-500 p-6 lg:p-8 rounded-xl text-center w-full lg:w-80 z-10 shadow-lg shadow-emerald-500/20">
+                            <h3 class="font-bold text-emerald-400 text-xl lg:text-2xl mb-2">👥 The Beneficiary</h3>
+                            <p class="text-sm text-slate-300 mb-2">Recipient</p>
+                            <p class="text-xs text-emerald-300 font-semibold mb-4">Holds Equitable Title</p>
+                            <div class="mt-4 pt-4 border-t border-emerald-500/30">
+                                <p class="text-xs text-emerald-300 font-semibold mb-2">Example Benefits:</p>
+                                <div class="space-y-1 text-xs text-slate-300 text-left">
+                                    <div>• Receives $50K annual distributions for living expenses</div>
+                                    <div>• Inherits full trust assets at age 35 (principal distribution)</div>
+                                    <div>• Protected from creditors; assets not counted in divorce</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -562,8 +674,8 @@
         </div>
     </section>
 
-    <!-- Section 4: Gemini LLM Tools -->
-    <section id="tools" class="py-12 bg-[#0f172a]">
+    <!-- Section 4: Gemini LLM Tools (HIDDEN) -->
+    <section id="tools" class="py-12 bg-[#0f172a]" style="display: none;">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
                 <h2 class="text-3xl font-bold text-white mb-4">4. Trust Analyst Tools ✨</h2>
@@ -576,9 +688,11 @@
                 <!-- Tool 1: Trust Definition Generator -->
                 <div class="glass-panel p-6 rounded-xl">
                     <h3 class="text-xl font-bold text-blue-400 mb-4">✨ Explain a Trust Type</h3>
-                    <p class="text-sm text-slate-400 mb-4">Input any trust name (e.g., GRAT, Irrevocable Life Insurance Trust) and get a concise breakdown.</p>
+                    <p class="text-sm text-slate-400 mb-4">Select a trust type from the dropdown to get a concise breakdown.</p>
                     <div class="space-y-4">
-                        <input type="text" id="trustInput" placeholder="e.g., Charitable Remainder Trust" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white placeholder-slate-500 focus:ring-blue-500 focus:border-blue-500 border border-slate-600">
+                        <select id="trustInput" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white focus:ring-blue-500 focus:border-blue-500 border border-slate-600">
+                            <option value="">-- Select a Trust Type --</option>
+                        </select>
                         <button id="generateDefinitionBtn" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded-lg transition duration-200">
                             Generate Definition ✨
                         </button>
@@ -609,11 +723,11 @@
         </div>
     </section>
 
-    <!-- Section 5: Trust Example - Visual Diagram -->
+    <!-- Section 4: Trust Example - Visual Diagram -->
     <section id="example" class="py-12 bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
-                <h2 class="text-3xl font-bold text-white mb-4">5. Trust in Action: ILIT Example</h2>
+                <h2 class="text-3xl font-bold text-white mb-4">4. Trust in Action: ILIT Example</h2>
                 <p class="text-slate-400 text-lg">
                     See how all the pieces fit together in a real-world example. This diagram shows an <strong class="text-blue-400">Irrevocable Life Insurance Trust (ILIT)</strong> and how each component interacts.
                 </p>
@@ -625,10 +739,20 @@
                     <div>
                         <label class="block text-sm font-medium text-slate-300 mb-2">Select Trust Example:</label>
                         <select id="trustExampleSelect" class="w-full px-4 py-2 rounded-lg bg-slate-700 text-white border border-slate-600 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="ilit">Irrevocable Life Insurance Trust (ILIT)</option>
                             <option value="revocable">Revocable Living Trust</option>
+                            <option value="ilit">Irrevocable Life Insurance Trust (ILIT)</option>
+                            <option value="bypass">Bypass Trust (Credit Shelter Trust)</option>
+                            <option value="qtip">QTIP Trust</option>
+                            <option value="dynasty">Dynasty Trust</option>
                             <option value="grat">Grantor Retained Annuity Trust (GRAT)</option>
                             <option value="crt">Charitable Remainder Trust (CRT)</option>
+                            <option value="clt">Charitable Lead Trust (CLT)</option>
+                            <option value="qprt">Qualified Personal Residence Trust (QPRT)</option>
+                            <option value="snt">Special Needs Trust (SNT)</option>
+                            <option value="asset">Asset Protection Trust</option>
+                            <option value="business">Business Succession Trust</option>
+                            <option value="gst">Generation-Skipping Trust (GST)</option>
+                            <option value="idgt">Intentionally Defective Grantor Trust (IDGT)</option>
                         </select>
                     </div>
                     <div class="md:col-span-2">
@@ -660,11 +784,11 @@
         </div>
     </section>
 
-    <!-- Section 6: Comprehensive Trust Types Database -->
+    <!-- Section 5: Comprehensive Trust Types Database -->
     <section id="trust-types" class="py-12 bg-[#0f172a]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
-                <h2 class="text-3xl font-bold text-white mb-4">6. Trust Types: Modular Analysis</h2>
+                <h2 class="text-3xl font-bold text-white mb-4">5. Trust Types: Modular Analysis</h2>
                 <p class="text-slate-400 text-lg">
                     Every trust is built from modular components. Search by trust name or filter by modules to understand shared characteristics and differences across trust types.
                 </p>
@@ -913,18 +1037,6 @@
                 </div>
             </div>
 
-            <!-- MVP Module Analysis -->
-            <div class="glass-panel p-6 rounded-xl mb-8">
-                <h3 class="text-xl font-bold text-white mb-4">MVP Module Analysis: Building the Foundation</h3>
-                <p class="text-sm text-slate-400 mb-6">
-                    Calculate which modules need to be built to serve various percentages of popular trusts. 
-                    The MVP (Minimum Viable Product) focuses on the top 5 most-used modules to maximize coverage with minimal development.
-                </p>
-                <div id="mvpAnalysis" class="space-y-6">
-                    <!-- MVP analysis will be populated by JavaScript -->
-                </div>
-            </div>
-
             <!-- Trust Types Grid -->
             <div id="trustTypesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Trust cards will be populated by JavaScript -->
@@ -940,11 +1052,11 @@
         </div>
     </section>
 
-    <!-- Section 7: Pitch Deck Generator for Orion Innovation -->
+    <!-- Section 6: Pitch Deck Generator for Orion Innovation -->
     <section id="pitch-deck" class="py-12 bg-slate-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="mb-10">
-                <h2 class="text-3xl font-bold text-white mb-4">7. Trust Automation Pitch: Orion Innovation</h2>
+                <h2 class="text-3xl font-bold text-white mb-4">6. Trust Automation Pitch: Orion Innovation</h2>
                 <p class="text-slate-400 text-lg">
                     Generate a customized pitch deck for automating trust creation and execution, tailored to Orion Innovation's digital transformation expertise and financial services focus.
                 </p>
@@ -968,11 +1080,27 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Section 7: MVP Module Analysis -->
+    <section id="mvp-analysis" class="py-12 bg-[#0f172a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-white mb-4">7. MVP Module Analysis: Building the Foundation</h2>
+                <p class="text-slate-400 text-lg">
+                    Calculate which modules need to be built to serve various percentages of popular trusts. 
+                    The MVP (Minimum Viable Product) focuses on the top 8 most-used modules to maximize coverage with minimal development.
+                </p>
+            </div>
+            <div id="mvpAnalysis" class="space-y-6">
+                <!-- MVP analysis will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="bg-[#0f172a] border-t border-slate-800 py-12">
         <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-slate-500 text-sm">&copy; 2023 TrustMetrics Analytics. For educational purposes only.</p>
+            <p class="text-slate-500 text-sm">&copy; 2023 TrustedResearch Analytics. For educational purposes only.</p>
         </div>
     </footer>
 
@@ -1062,6 +1190,22 @@
             }
         };
 
+        // Populate trust type dropdown
+        function populateTrustDropdown() {
+            const select = document.getElementById('trustInput');
+            if (!select || !TRUST_TYPES) return;
+            
+            // Sort trust types alphabetically by name
+            const sortedTrusts = [...TRUST_TYPES].sort((a, b) => a.name.localeCompare(b.name));
+            
+            sortedTrusts.forEach(trust => {
+                const option = document.createElement('option');
+                option.value = trust.name;
+                option.textContent = trust.name;
+                select.appendChild(option);
+            });
+        }
+
         // LLM Feature 1: Trust Definition Generator
         const generateTrustDefinition = async () => {
             const input = document.getElementById('trustInput').value.trim();
@@ -1069,7 +1213,7 @@
             const loadingElement = document.getElementById('definitionLoading');
             
             if (!input) {
-                outputElement.innerHTML = `<p class="text-red-400 italic">Please enter a trust name to explain.</p>`;
+                outputElement.innerHTML = `<p class="text-red-400 italic">Please select a trust type to explain.</p>`;
                 return;
             }
 
@@ -1481,298 +1625,468 @@
                     distribution: ['Income Only', 'Charitable Remainder'],
                     specialFeatures: []
                 }
+            },
+            bypass: {
+                name: 'Bypass Trust (Credit Shelter Trust)',
+                description: 'Maximizes estate tax exemption by utilizing both spouses\' exemptions.',
+                grantor: {
+                    name: 'John & Mary (Married Couple)',
+                    actions: ['Creates trust in will', 'Funds with exemption amount', 'Provides for surviving spouse'],
+                    assets: ['$13.61M (2024 exemption)', 'Investment portfolio', 'Real estate', 'Business interests']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Manages trust assets', 'Provides income to spouse', 'Preserves exemption'],
+                    powers: ['Investment management', 'Distribution discretion', 'Principal access decisions']
+                },
+                beneficiary: {
+                    name: 'Surviving Spouse (Income) & Children (Remainder)',
+                    receives: ['Income during spouse\'s lifetime', 'Principal if needed', 'Remainder to children'],
+                    timing: 'Income during lifetime, remainder after second death'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Surviving spouse income rights', 'Remainder to children'],
+                    taxBenefits: ['Doubles estate tax exemption', 'Estate tax deferral']
+                },
+                flow: [
+                    { step: 1, title: 'First Spouse Death', description: 'Upon first spouse\'s death, assets up to exemption amount ($13.61M in 2024) fund the bypass trust.' },
+                    { step: 2, title: 'Trust Funding', description: 'Assets transferred to bypass trust: investment accounts, real estate, business interests. Real estate requires deed transfer and valuation.' },
+                    { step: 3, title: 'Exemption Preservation', description: 'Bypass trust uses first spouse\'s exemption, preserving it from estate tax. Surviving spouse\'s exemption remains available.' },
+                    { step: 4, title: 'Income Distribution', description: 'Trustee provides income to surviving spouse from trust assets. Can include rental income from real estate or dividends from investments.' },
+                    { step: 5, title: 'Principal Access', description: 'Surviving spouse may access principal for health, education, maintenance, and support (HEMS standard).' },
+                    { step: 6, title: 'Asset Growth', description: 'Assets grow within bypass trust, free from estate tax. Real estate and alternative assets can appreciate significantly.' },
+                    { step: 7, title: 'Second Death', description: 'Upon surviving spouse\'s death, bypass trust assets pass to children free of estate tax, effectively doubling the exemption.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Income Only', 'Principal Access'],
+                    specialFeatures: []
+                }
+            },
+            qtip: {
+                name: 'QTIP Trust (Qualified Terminable Interest Property)',
+                description: 'Provides income to surviving spouse while controlling ultimate distribution.',
+                grantor: {
+                    name: 'John (Deceased Spouse)',
+                    actions: ['Creates trust in will', 'Funds with assets', 'Names spouse as income beneficiary'],
+                    assets: ['$5M estate', 'Investment portfolio', 'Real estate', 'Business interests']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Manages trust assets', 'Pays income to spouse', 'Controls ultimate distribution'],
+                    powers: ['Investment management', 'Income distribution', 'Remainder beneficiary control']
+                },
+                beneficiary: {
+                    name: 'Mary (Surviving Spouse - Income) & Children (Remainder)',
+                    receives: ['All income during lifetime', 'Principal access limited', 'Remainder to children'],
+                    timing: 'Income during spouse\'s lifetime, remainder after death'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Qualified terminable interest', 'Marital deduction eligible'],
+                    taxBenefits: ['Marital deduction', 'Estate tax deferral', 'Controls ultimate beneficiaries']
+                },
+                flow: [
+                    { step: 1, title: 'Grantor Death', description: 'Upon grantor\'s death, assets fund QTIP trust. Estate receives marital deduction, deferring estate tax.' },
+                    { step: 2, title: 'Trust Funding', description: 'Assets transferred to QTIP trust: investments, real estate, business interests. Real estate requires deed transfer and valuation.' },
+                    { step: 3, title: 'Marital Deduction', description: 'Estate receives unlimited marital deduction, deferring all estate tax until surviving spouse\'s death.' },
+                    { step: 4, title: 'Income Requirement', description: 'Trustee must pay all income to surviving spouse annually. Income includes dividends, interest, and rental income from real estate.' },
+                    { step: 5, title: 'Principal Restrictions', description: 'Surviving spouse has limited access to principal. Trustee has discretion but typically only for HEMS needs.' },
+                    { step: 6, title: 'Asset Management', description: 'Trustee manages assets for growth and income. Can invest in real estate, alternative assets, or traditional investments.' },
+                    { step: 7, title: 'Remainder Distribution', description: 'Upon surviving spouse\'s death, assets pass to remainder beneficiaries (typically children from first marriage) as specified in trust.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Income Only'],
+                    specialFeatures: []
+                }
+            },
+            dynasty: {
+                name: 'Dynasty Trust',
+                description: 'Multi-generational trust designed to last for multiple generations, avoiding estate taxes.',
+                grantor: {
+                    name: 'John (Founder)',
+                    actions: ['Creates dynasty trust', 'Funds with assets', 'Uses GST exemption'],
+                    assets: ['$13.61M (GST exemption)', 'Investment portfolio', 'Real estate', 'Family business']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Office',
+                    actions: ['Manages assets for generations', 'Distributes to beneficiaries', 'Preserves wealth'],
+                    powers: ['Long-term investment strategy', 'Distribution discretion', 'Multi-generational planning']
+                },
+                beneficiary: {
+                    name: 'Children, Grandchildren, Future Generations',
+                    receives: ['Discretionary distributions', 'Education funding', 'Support payments'],
+                    timing: 'Distributions as needed, assets preserved for future generations'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Perpetual (in some states)', 'GST exempt'],
+                    taxBenefits: ['Generation-skipping tax exemption', 'Estate tax avoidance for generations']
+                },
+                flow: [
+                    { step: 1, title: 'Trust Creation', description: 'Grantor creates dynasty trust and allocates GST exemption ($13.61M in 2024). Trust designed to last multiple generations.' },
+                    { step: 2, title: 'Initial Funding', description: 'Grantor transfers assets to dynasty trust: investments, real estate, family business interests. Real estate requires professional valuation and deed transfer.' },
+                    { step: 3, title: 'GST Exemption Allocation', description: 'Grantor allocates GST exemption to trust, protecting it from generation-skipping transfer tax for all future generations.' },
+                    { step: 4, title: 'Multi-Generational Management', description: 'Trustee manages assets with long-term perspective, investing in real estate, alternative assets, and growth investments for future generations.' },
+                    { step: 5, title: 'Beneficiary Distributions', description: 'Trustee makes discretionary distributions to current beneficiaries (children, grandchildren) for education, health, maintenance, and support.' },
+                    { step: 6, title: 'Wealth Preservation', description: 'Assets grow within trust, protected from estate taxes, generation-skipping taxes, and creditors for multiple generations.' },
+                    { step: 7, title: 'Perpetual Growth', description: 'Trust continues for multiple generations (perpetual in some states), preserving family wealth and providing for future descendants.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Generation-Skipping'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: ['Generation-Skipping']
+                }
+            },
+            clt: {
+                name: 'Charitable Lead Trust (CLT)',
+                description: 'Provides income to charity first, then remainder to beneficiaries.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates CLT', 'Transfers assets', 'Names charity as lead beneficiary'],
+                    assets: ['$2M in assets', 'Investment portfolio', 'Real estate', 'Business interests']
+                },
+                trustee: {
+                    name: 'Corporate Trustee',
+                    actions: ['Manages assets', 'Pays income to charity', 'Distributes remainder to beneficiaries'],
+                    powers: ['Investment management', 'Charitable payments', 'Remainder distribution']
+                },
+                beneficiary: {
+                    name: 'Charity (Lead - Income) & Children (Remainder)',
+                    receives: ['Charity: income stream (5-7% annually)', 'Children: remainder after term'],
+                    timing: 'Charity receives income during term, children receive remainder'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Fixed charitable term', 'Remainder to family'],
+                    taxBenefits: ['Charitable income tax deduction', 'Estate tax reduction', 'Gift tax savings']
+                },
+                flow: [
+                    { step: 1, title: 'CLT Creation', description: 'Grantor creates irrevocable CLT with fixed term (e.g., 20 years) and names charity as lead beneficiary.' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets to CLT: investments, real estate, business interests. Real estate requires valuation and deed transfer.' },
+                    { step: 3, title: 'Charitable Deduction', description: 'Grantor receives immediate income tax deduction for present value of charitable income stream. Larger deduction with longer terms.' },
+                    { step: 4, title: 'Charitable Payments', description: 'Trustee pays fixed percentage (5-7%) of trust value to charity annually. Payments can be funded by rental income, dividends, or asset sales.' },
+                    { step: 5, title: 'Asset Growth', description: 'Assets grow within CLT during charitable term. Real estate and alternative assets can appreciate, increasing remainder value.' },
+                    { step: 6, title: 'Term Completion', description: 'After charitable term ends, all remaining assets (including appreciation) pass to remainder beneficiaries (typically children).' },
+                    { step: 7, title: 'Tax Benefits', description: 'Grantor receives charitable deduction, reduces estate tax, and transfers remainder to children with minimal gift tax exposure.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Charitable Deduction'],
+                    primaryPurpose: ['Charitable Giving', 'Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Charitable Remainder'],
+                    specialFeatures: []
+                }
+            },
+            qprt: {
+                name: 'Qualified Personal Residence Trust (QPRT)',
+                description: 'Transfers primary residence or vacation home to beneficiaries at reduced gift tax value.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates QPRT', 'Transfers residence', 'Retains use during term'],
+                    assets: ['Primary residence ($1.5M)', 'Vacation home ($800K)', 'Personal property']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Holds legal title', 'Manages property', 'Distributes after term'],
+                    powers: ['Property management', 'Maintenance decisions', 'Distribution authority']
+                },
+                beneficiary: {
+                    name: 'Children',
+                    receives: ['Residence after term', 'Appreciation above discount'],
+                    timing: 'After retained interest term (typically 10-15 years)'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Fixed term', 'Grantor retains use'],
+                    taxBenefits: ['Gift tax discount', 'Estate tax exclusion', 'Appreciation transfer']
+                },
+                flow: [
+                    { step: 1, title: 'QPRT Creation', description: 'Grantor creates irrevocable QPRT with fixed term (typically 10-15 years) and names children as remainder beneficiaries.' },
+                    { step: 2, title: 'Residence Transfer', description: 'Grantor transfers residence to QPRT via deed. Can include primary residence, vacation home, or both (in separate QPRTs).' },
+                    { step: 3, title: 'Valuation Discount', description: 'Gift value = full value minus present value of retained interest. Longer terms = larger discount (typically 30-50% reduction).' },
+                    { step: 4, title: 'Retained Use', description: 'Grantor continues to live in residence rent-free during term. Must pay property taxes, insurance, and maintenance.' },
+                    { step: 5, title: 'Term Completion', description: 'After term ends, residence transfers to children. If grantor wants to continue living there, must pay fair market rent.' },
+                    { step: 6, title: 'Appreciation Benefit', description: 'All appreciation during term transfers to children tax-free. Particularly valuable in appreciating real estate markets.' },
+                    { step: 7, title: 'Estate Exclusion', description: 'Residence and all appreciation excluded from grantor\'s estate, reducing estate tax liability significantly.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Gift Tax Exclusion'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Grantor Retains Control'],
+                    distribution: ['Principal Access'],
+                    specialFeatures: ['Real Estate']
+                }
+            },
+            snt: {
+                name: 'Special Needs Trust (SNT)',
+                description: 'Preserves government benefits eligibility while providing supplemental support.',
+                grantor: {
+                    name: 'John (Parent)',
+                    actions: ['Creates SNT', 'Funds with assets', 'Names disabled child as beneficiary'],
+                    assets: ['$500K inheritance', 'Life insurance proceeds', 'Savings', 'Real estate']
+                },
+                trustee: {
+                    name: 'Family Member or Professional Trustee',
+                    actions: ['Manages trust assets', 'Makes supplemental distributions', 'Preserves benefits'],
+                    powers: ['Distribution discretion', 'Benefit coordination', 'Asset management']
+                },
+                beneficiary: {
+                    name: 'Disabled Child',
+                    receives: ['Supplemental support', 'Quality of life enhancements', 'Not basic needs'],
+                    timing: 'Distributions as needed, preserves SSI/Medicaid eligibility'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Supplemental needs only', 'Medicaid payback provision'],
+                    taxBenefits: ['Preserves government benefits', 'Asset protection']
+                },
+                flow: [
+                    { step: 1, title: 'SNT Creation', description: 'Parent creates special needs trust for disabled child. Can be first-party (child\'s assets) or third-party (parent\'s assets).' },
+                    { step: 2, title: 'Trust Funding', description: 'Assets transferred to SNT: inheritance, life insurance, savings, or real estate. Real estate requires deed transfer and valuation.' },
+                    { step: 3, title: 'Benefit Preservation', description: 'Trust structured to preserve SSI and Medicaid eligibility. Distributions must not duplicate government benefits.' },
+                    { step: 4, title: 'Supplemental Distributions', description: 'Trustee makes distributions for supplemental needs: education, recreation, travel, technology, home improvements, not food or shelter.' },
+                    { step: 5, title: 'Asset Management', description: 'Trustee manages assets to provide long-term support. Can invest in real estate, investments, or other assets for growth.' },
+                    { step: 6, title: 'Lifetime Support', description: 'Trust provides supplemental support throughout beneficiary\'s lifetime, enhancing quality of life while preserving government benefits.' },
+                    { step: 7, title: 'Medicaid Payback', description: 'Upon beneficiary\'s death, remaining assets may be subject to Medicaid payback (first-party SNT) or pass to other beneficiaries (third-party SNT).' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: [],
+                    primaryPurpose: ['Special Needs'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: []
+                }
+            },
+            asset: {
+                name: 'Asset Protection Trust',
+                description: 'Shields assets from creditors while allowing grantor to be discretionary beneficiary.',
+                grantor: {
+                    name: 'John (Business Owner)',
+                    actions: ['Creates trust', 'Transfers assets', 'Names self as discretionary beneficiary'],
+                    assets: ['$2M in investments', 'Real estate', 'Business interests', 'Liquid assets']
+                },
+                trustee: {
+                    name: 'Offshore Trustee or Domestic Trustee (DAPT)',
+                    actions: ['Manages assets', 'Makes discretionary distributions', 'Protects from creditors'],
+                    powers: ['Investment management', 'Distribution discretion', 'Creditor protection']
+                },
+                beneficiary: {
+                    name: 'John (Discretionary) & Family',
+                    receives: ['Discretionary distributions', 'Asset protection', 'Creditor shield'],
+                    timing: 'Distributions as needed, assets protected from creditors'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Discretionary beneficiary', 'Spendthrift provisions'],
+                    taxBenefits: ['Creditor protection', 'Asset shielding']
+                },
+                flow: [
+                    { step: 1, title: 'Trust Creation', description: 'Grantor creates irrevocable asset protection trust. Can be domestic (DAPT in certain states) or offshore trust.' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets to trust: investments, real estate, business interests. Real estate requires deed transfer and valuation.' },
+                    { step: 3, title: 'Creditor Protection', description: 'Assets transferred to trust are protected from future creditors. Must be done before creditor claims arise (fraudulent transfer rules apply).' },
+                    { step: 4, title: 'Discretionary Distributions', description: 'Trustee has discretion to distribute to grantor and family. Grantor cannot demand distributions, maintaining creditor protection.' },
+                    { step: 5, title: 'Asset Management', description: 'Trustee manages assets for growth and protection. Can invest in real estate, alternative assets, or traditional investments.' },
+                    { step: 6, title: 'Liability Shield', description: 'Trust assets protected from business liabilities, lawsuits, divorce, and other creditor claims. Particularly valuable for high-risk professions.' },
+                    { step: 7, title: 'Long-Term Protection', description: 'Assets remain protected for grantor\'s lifetime and can pass to beneficiaries, maintaining creditor protection across generations.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: [],
+                    primaryPurpose: ['Asset Protection'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: []
+                }
+            },
+            business: {
+                name: 'Business Succession Trust',
+                description: 'Facilitates transfer of business interests to next generation with tax efficiency.',
+                grantor: {
+                    name: 'John (Business Owner)',
+                    actions: ['Creates trust', 'Transfers business interests', 'Plans succession'],
+                    assets: ['Family business (100% ownership)', 'Real estate (business property)', 'Equipment', 'Intellectual property']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Manages business interests', 'Coordinates succession', 'Distributes to heirs'],
+                    powers: ['Business management', 'Succession planning', 'Distribution discretion']
+                },
+                beneficiary: {
+                    name: 'Children (Successors)',
+                    receives: ['Business interests', 'Ownership over time', 'Management training'],
+                    timing: 'Gradual transfer during lifetime or at death'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Business succession plan', 'Valuation discounts'],
+                    taxBenefits: ['Estate tax reduction', 'Valuation discounts', 'Tax-efficient transfer']
+                },
+                flow: [
+                    { step: 1, title: 'Trust Creation', description: 'Business owner creates irrevocable trust and develops succession plan for transferring business to next generation.' },
+                    { step: 2, title: 'Business Valuation', description: 'Business valued for transfer purposes. Can use valuation discounts for lack of marketability and minority interests (typically 20-40% discount).' },
+                    { step: 3, title: 'Interest Transfer', description: 'Business interests transferred to trust: ownership shares, real estate, equipment, intellectual property. Real estate requires deed transfer.' },
+                    { step: 4, title: 'Gift Tax Planning', description: 'Transfer structured to minimize gift tax using annual exclusions, valuation discounts, and exemption amounts.' },
+                    { step: 5, title: 'Succession Management', description: 'Trustee manages business interests and coordinates succession. Can provide management training and gradual ownership transfer.' },
+                    { step: 6, title: 'Business Continuity', description: 'Business continues operating under trust ownership. Real estate and business assets managed for long-term success.' },
+                    { step: 7, title: 'Heir Transfer', description: 'Business interests gradually or fully transfer to children, maintaining business continuity while minimizing estate tax.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction'],
+                    primaryPurpose: ['Business Succession', 'Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: ['Business Interests']
+                }
+            },
+            gst: {
+                name: 'Generation-Skipping Trust (GST)',
+                description: 'Transfers assets to grandchildren or later generations, skipping estate tax on children.',
+                grantor: {
+                    name: 'John (Grandparent)',
+                    actions: ['Creates GST trust', 'Funds with assets', 'Allocates GST exemption'],
+                    assets: ['$13.61M (GST exemption)', 'Investment portfolio', 'Real estate', 'Family wealth']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Manages assets', 'Distributes to grandchildren', 'Skips children\'s generation'],
+                    powers: ['Investment management', 'Distribution discretion', 'Multi-generational planning']
+                },
+                beneficiary: {
+                    name: 'Grandchildren & Future Generations',
+                    receives: ['Discretionary distributions', 'Education funding', 'Support payments'],
+                    timing: 'Distributions as needed, skips children\'s generation for tax purposes'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'GST exempt', 'Generation-skipping structure'],
+                    taxBenefits: ['GST exemption', 'Skips generation tax', 'Multi-generational planning']
+                },
+                flow: [
+                    { step: 1, title: 'GST Trust Creation', description: 'Grandparent creates generation-skipping trust and allocates GST exemption ($13.61M in 2024) to protect transfers from GST tax.' },
+                    { step: 2, title: 'Asset Transfer', description: 'Assets transferred to GST trust: investments, real estate, family wealth. Real estate requires valuation and deed transfer.' },
+                    { step: 3, title: 'GST Exemption Allocation', description: 'Grantor allocates GST exemption to trust, protecting all future distributions from 40% generation-skipping transfer tax.' },
+                    { step: 4, title: 'Generation Skip', description: 'Trust structured to skip children\'s generation for tax purposes, transferring directly to grandchildren and beyond.' },
+                    { step: 5, title: 'Beneficiary Distributions', description: 'Trustee makes discretionary distributions to grandchildren for education, health, maintenance, and support, bypassing children\'s estate.' },
+                    { step: 6, title: 'Tax Avoidance', description: 'Assets avoid estate tax in children\'s generation, transferring directly to grandchildren. All appreciation also transfers tax-free.' },
+                    { step: 7, title: 'Multi-Generational Wealth', description: 'Trust preserves wealth for multiple generations, providing for grandchildren and future descendants while minimizing transfer taxes.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Generation-Skipping', 'Estate Tax Reduction'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Trustee Discretion'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: ['Generation-Skipping']
+                }
+            },
+            idgt: {
+                name: 'Intentionally Defective Grantor Trust (IDGT)',
+                description: 'Grantor pays income tax but trust assets excluded from estate, creating tax-free growth.',
+                grantor: {
+                    name: 'John (Grantor)',
+                    actions: ['Creates IDGT', 'Transfers assets', 'Pays income taxes'],
+                    assets: ['$5M in assets', 'Investment portfolio', 'Real estate', 'Business interests']
+                },
+                trustee: {
+                    name: 'Corporate Trustee or Family Member',
+                    actions: ['Manages assets', 'Distributes to beneficiaries', 'Coordinates tax payments'],
+                    powers: ['Investment management', 'Distribution discretion', 'Tax coordination']
+                },
+                beneficiary: {
+                    name: 'Children',
+                    receives: ['Trust distributions', 'Tax-free growth', 'Estate-excluded assets'],
+                    timing: 'Distributions as needed, assets excluded from grantor\'s estate'
+                },
+                trustAgreement: {
+                    terms: ['Irrevocable', 'Grantor trust status', 'Estate exclusion'],
+                    taxBenefits: ['Estate exclusion', 'Grantor pays taxes', 'Tax-free growth']
+                },
+                flow: [
+                    { step: 1, title: 'IDGT Creation', description: 'Grantor creates intentionally defective grantor trust. Trust is "defective" for income tax (grantor pays) but "complete" for estate tax (excluded).' },
+                    { step: 2, title: 'Asset Transfer', description: 'Grantor transfers assets to IDGT: investments, real estate, business interests. Real estate requires valuation and deed transfer.' },
+                    { step: 3, title: 'Estate Exclusion', description: 'Assets immediately excluded from grantor\'s estate for estate tax purposes, even though grantor pays income taxes.' },
+                    { step: 4, title: 'Grantor Tax Payment', description: 'Grantor pays all income taxes on trust income and gains. This is effectively a tax-free gift to beneficiaries (taxes reduce grantor\'s estate).' },
+                    { step: 5, title: 'Tax-Free Growth', description: 'Assets grow within IDGT without income tax burden on trust. All growth benefits beneficiaries without reducing grantor\'s estate further.' },
+                    { step: 6, title: 'Beneficiary Distributions', description: 'Trustee makes distributions to children as needed. Distributions are income tax-free to beneficiaries (grantor already paid taxes).' },
+                    { step: 7, title: 'Estate Tax Savings', description: 'Upon grantor\'s death, all IDGT assets (including all growth) pass to beneficiaries free of estate tax, while grantor\'s estate was reduced by taxes paid.' }
+                ],
+                modules: {
+                    revocability: ['Irrevocable'],
+                    taxTreatment: ['Estate Tax Reduction', 'Income Tax Planning'],
+                    primaryPurpose: ['Estate Planning'],
+                    control: ['Grantor Retains Control'],
+                    distribution: ['Discretionary'],
+                    specialFeatures: []
+                }
             }
         };
 
-        let currentExample = 'ilit';
+        let currentExample = 'revocable';
 
         function renderTrustDiagram() {
             const example = TRUST_EXAMPLES[currentExample];
             const diagram = document.getElementById('trustDiagram');
             
-            // Use viewBox for responsive SVG instead of fixed dimensions
-            const viewBoxWidth = 1000;
-            const viewBoxHeight = 700;
+            // Create Mermaid flowchart syntax
+            const grantorLabel = example.grantor.name.replace(/'/g, "''");
+            const trusteeLabel = example.trustee.name.replace(/'/g, "''");
+            const beneficiaryLabel = example.beneficiary.name.replace(/'/g, "''");
+            const trustName = example.name.replace(/'/g, "''");
             
-            // Calculate positions as percentages of viewBox (will scale automatically)
-            const centerX = viewBoxWidth / 2;
-            const topY = 100;
-            const middleY = viewBoxHeight / 2;
-            const bottomY = viewBoxHeight - 100;
-            const leftX = viewBoxWidth * 0.2;
-            const rightX = viewBoxWidth * 0.8;
+            const mermaidCode = `
+flowchart TD
+    A["👤 ${grantorLabel}<br/>Grantor"] -->|"Transfers Assets"| B["📜 Trust Agreement<br/>${trustName}"]
+    B -->|"Management Authority"| C["⚖️ ${trusteeLabel}<br/>Trustee"]
+    B -->|"Distributions"| D["👥 ${beneficiaryLabel}<br/>Beneficiary"]
+    C -.->|"Manages For"| D
+    
+    style A fill:#1e3a8a,stroke:#3b82f6,stroke-width:3px,color:#f8fafc
+    style B fill:#581c87,stroke:#8b5cf6,stroke-width:3px,color:#f8fafc
+    style C fill:#164e63,stroke:#06b6d4,stroke-width:3px,color:#f8fafc
+    style D fill:#065f46,stroke:#10b981,stroke-width:3px,color:#f8fafc
+            `.trim();
+            
+            // Create unique ID for this diagram
+            const diagramId = `mermaid-diagram-${currentExample}-${Date.now()}`;
             
             diagram.innerHTML = `
-                <style>
-                    .trust-diagram-container {
-                        position: relative;
-                        min-height: 700px;
-                        padding: 2rem 1rem;
-                        overflow: visible;
-                    }
-                    
-                    .trust-card {
-                        background: rgba(30, 41, 59, 0.8);
-                        backdrop-filter: blur(10px);
-                        border: 2px solid;
-                        border-radius: 12px;
-                        padding: 1.25rem;
-                        text-align: center;
-                        word-wrap: break-word;
-                        overflow-wrap: break-word;
-                        max-width: 100%;
-                        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-                    }
-                    
-                    .trust-card h3 {
-                        font-size: clamp(1rem, 2vw, 1.125rem);
-                        margin-bottom: 0.5rem;
-                        line-height: 1.3;
-                    }
-                    
-                    .trust-card p, .trust-card div {
-                        font-size: clamp(0.75rem, 1.5vw, 0.875rem);
-                        line-height: 1.4;
-                    }
-                    
-                    .trust-card ul, .trust-card .space-y-1 {
-                        text-align: left;
-                        margin-top: 0.5rem;
-                    }
-                    
-                    /* Desktop Layout */
-                    @media (min-width: 1024px) {
-                        .trust-diagram-grid {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            grid-template-rows: auto 1fr auto;
-                            gap: 2rem;
-                            position: relative;
-                            min-height: 600px;
-                        }
-                        
-                        .trust-grantor {
-                            grid-column: 1 / -1;
-                            grid-row: 1;
-                            justify-self: center;
-                            max-width: 300px;
-                        }
-                        
-                        .trust-agreement {
-                            grid-column: 1;
-                            grid-row: 2;
-                            align-self: center;
-                            max-width: 320px;
-                        }
-                        
-                        .trust-trustee {
-                            grid-column: 2;
-                            grid-row: 2;
-                            align-self: start;
-                            max-width: 280px;
-                        }
-                        
-                        .trust-beneficiary {
-                            grid-column: 1 / -1;
-                            grid-row: 3;
-                            justify-self: center;
-                            max-width: 300px;
-                        }
-                        
-                        .trust-arrows {
-                            display: block;
-                        }
-                    }
-                    
-                    /* Tablet Layout */
-                    @media (min-width: 768px) and (max-width: 1023px) {
-                        .trust-diagram-grid {
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            grid-template-rows: auto auto auto;
-                            gap: 1.5rem;
-                            position: relative;
-                        }
-                        
-                        .trust-grantor {
-                            grid-column: 1 / -1;
-                            grid-row: 1;
-                            justify-self: center;
-                            max-width: 100%;
-                        }
-                        
-                        .trust-agreement {
-                            grid-column: 1;
-                            grid-row: 2;
-                            max-width: 100%;
-                        }
-                        
-                        .trust-trustee {
-                            grid-column: 2;
-                            grid-row: 2;
-                            max-width: 100%;
-                        }
-                        
-                        .trust-beneficiary {
-                            grid-column: 1 / -1;
-                            grid-row: 3;
-                            justify-self: center;
-                            max-width: 100%;
-                        }
-                        
-                        .trust-arrows {
-                            display: none;
-                        }
-                    }
-                    
-                    /* Mobile Layout */
-                    @media (max-width: 767px) {
-                        .trust-diagram-grid {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 1.5rem;
-                        }
-                        
-                        .trust-card {
-                            width: 100%;
-                            max-width: 100%;
-                        }
-                        
-                        .trust-arrows {
-                            display: none;
-                        }
-                    }
-                </style>
-                
-                <div class="trust-diagram-container">
-                    <div class="trust-diagram-grid">
-                        <!-- Grantor Section -->
-                        <div class="trust-card trust-grantor border-blue-500 bg-blue-600/20">
-                            <div class="text-2xl mb-2">👤</div>
-                            <h3 class="font-bold text-blue-400">${example.grantor.name}</h3>
-                            <p class="text-xs text-slate-300 mb-3">Grantor</p>
-                            <div class="space-y-1 text-xs text-slate-400">
-                                ${example.grantor.actions.map(a => `<div>• ${a}</div>`).join('')}
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-blue-500/30">
-                                <p class="text-xs font-semibold text-blue-300 mb-2">Assets:</p>
-                                ${example.grantor.assets.map(a => `<div class="text-xs text-slate-300">${a}</div>`).join('')}
-                            </div>
-                        </div>
-
-                        <!-- Trust Agreement (Center) -->
-                        <div class="trust-card trust-agreement border-purple-500 bg-purple-600/20">
-                            <div class="text-3xl mb-2">📜</div>
-                            <h3 class="font-bold text-purple-400">Trust Agreement</h3>
-                            <p class="text-xs text-slate-300 mb-3 break-words">${example.name}</p>
-                            <div class="space-y-2 text-xs">
-                                <div class="bg-slate-800/50 p-2 rounded">
-                                    <p class="font-semibold text-purple-300 mb-1">Terms:</p>
-                                    ${example.trustAgreement.terms.map(t => `<div class="text-slate-300 break-words">• ${t}</div>`).join('')}
-                                </div>
-                                <div class="bg-slate-800/50 p-2 rounded mt-2">
-                                    <p class="font-semibold text-purple-300 mb-1">Tax Benefits:</p>
-                                    ${example.trustAgreement.taxBenefits.map(t => `<div class="text-slate-300 break-words">• ${t}</div>`).join('')}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Trustee Section -->
-                        <div class="trust-card trust-trustee border-cyan-500 bg-cyan-600/20">
-                            <div class="text-2xl mb-2">⚖️</div>
-                            <h3 class="font-bold text-cyan-400">${example.trustee.name}</h3>
-                            <p class="text-xs text-slate-300 mb-3">Trustee</p>
-                            <div class="space-y-1 text-xs text-slate-400">
-                                ${example.trustee.actions.map(a => `<div>• ${a}</div>`).join('')}
-                            </div>
-                            <div class="mt-4 pt-3 border-t border-cyan-500/30">
-                                <p class="text-xs font-semibold text-cyan-300 mb-2">Powers:</p>
-                                ${example.trustee.powers.map(p => `<div class="text-xs text-slate-300">• ${p}</div>`).join('')}
-                            </div>
-                        </div>
-
-                        <!-- Beneficiary Section -->
-                        <div class="trust-card trust-beneficiary border-emerald-500 bg-emerald-600/20">
-                            <div class="text-2xl mb-2">👥</div>
-                            <h3 class="font-bold text-emerald-400">${example.beneficiary.name}</h3>
-                            <p class="text-xs text-slate-300 mb-3">Beneficiary</p>
-                            <div class="space-y-1 text-xs text-slate-400 mb-3">
-                                ${example.beneficiary.receives.map(r => `<div>• ${r}</div>`).join('')}
-                            </div>
-                            <div class="text-xs text-emerald-300 font-semibold break-words">
-                                Timing: ${example.beneficiary.timing}
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Flow Arrows (SVG) - Desktop Only -->
-                    <svg class="trust-arrows absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0;" viewBox="0 0 ${viewBoxWidth} ${viewBoxHeight}" preserveAspectRatio="xMidYMid meet">
-                        <defs>
-                            <marker id="arrowhead-blue" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
-                                <polygon points="0 0, 12 4, 0 8" fill="#3b82f6" stroke="#3b82f6" stroke-width="0.5" />
-                            </marker>
-                            <marker id="arrowhead-cyan" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
-                                <polygon points="0 0, 12 4, 0 8" fill="#06b6d4" stroke="#06b6d4" stroke-width="0.5" />
-                            </marker>
-                            <marker id="arrowhead-emerald" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
-                                <polygon points="0 0, 12 4, 0 8" fill="#10b981" stroke="#10b981" stroke-width="0.5" />
-                            </marker>
-                            <marker id="arrowhead-purple" markerWidth="12" markerHeight="12" refX="10" refY="4" orient="auto" markerUnits="strokeWidth">
-                                <polygon points="0 0, 12 4, 0 8" fill="#8b5cf6" stroke="#8b5cf6" stroke-width="0.5" />
-                            </marker>
-                            <!-- Background for text labels -->
-                            <filter id="textBackground" x="-20%" y="-20%" width="140%" height="140%">
-                                <feFlood flood-color="rgba(15, 23, 42, 0.9)" result="bg"/>
-                                <feComposite in="bg" in2="SourceAlpha" operator="in"/>
-                            </filter>
-                        </defs>
-                        
-                        <!-- Grantor to Trust Agreement: Assets & Control -->
-                        <path d="M ${centerX} ${topY + 70} Q ${centerX} ${topY + 130} ${leftX + 20} ${middleY - 30}" 
-                              stroke="#3b82f6" stroke-width="3" fill="none" marker-end="url(#arrowhead-blue)" 
-                              opacity="0.9" />
-                        <g>
-                            <rect x="${(centerX + leftX) / 2 - 60}" y="${topY + 100 - 10}" width="120" height="20" 
-                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
-                            <text x="${(centerX + leftX) / 2}" y="${topY + 105}" text-anchor="middle" 
-                                  fill="#60a5fa" font-size="13" font-weight="600">Transfers Assets</text>
-                        </g>
-                        
-                        <!-- Trust Agreement to Trustee: Management Authority -->
-                        <path d="M ${leftX + 60} ${middleY - 10} L ${rightX - 60} ${middleY - 110}" 
-                              stroke="#06b6d4" stroke-width="3" fill="none" marker-end="url(#arrowhead-cyan)" 
-                              opacity="0.9" />
-                        <g>
-                            <rect x="${(leftX + rightX) / 2 - 75}" y="${middleY - 70 - 10}" width="150" height="20" 
-                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
-                            <text x="${(leftX + rightX) / 2}" y="${middleY - 65}" text-anchor="middle" 
-                                  fill="#22d3ee" font-size="13" font-weight="600">Management Authority</text>
-                        </g>
-                        
-                        <!-- Trust Agreement to Beneficiary: Distributions -->
-                        <path d="M ${leftX + 20} ${middleY + 50} Q ${centerX - 30} ${middleY + 120} ${centerX - 20} ${bottomY - 90}" 
-                              stroke="#10b981" stroke-width="3" fill="none" marker-end="url(#arrowhead-emerald)" 
-                              opacity="0.9" />
-                        <g>
-                            <rect x="${centerX - 70}" y="${(middleY + 50 + bottomY - 90) / 2 - 10}" width="140" height="20" 
-                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
-                            <text x="${centerX}" y="${(middleY + 50 + bottomY - 90) / 2 + 5}" text-anchor="middle" 
-                                  fill="#34d399" font-size="13" font-weight="600">Distributions</text>
-                        </g>
-                        
-                        <!-- Trustee to Beneficiary: Fiduciary Duty -->
-                        <path d="M ${rightX - 60} ${middleY - 90} Q ${centerX + 40} ${middleY + 30} ${centerX + 30} ${bottomY - 90}" 
-                              stroke="#8b5cf6" stroke-width="2.5" fill="none" marker-end="url(#arrowhead-purple)" 
-                              stroke-dasharray="4,4" opacity="0.75" />
-                        <g>
-                            <rect x="${(rightX + centerX) / 2 - 55}" y="${middleY - 20 - 10}" width="110" height="20" 
-                                  fill="rgba(15, 23, 42, 0.85)" rx="4" />
-                            <text x="${(rightX + centerX) / 2}" y="${middleY - 15}" text-anchor="middle" 
-                                  fill="#a78bfa" font-size="12" font-weight="600">Fiduciary Duty</text>
-                        </g>
-                    </svg>
+                <div class="mermaid-container bg-slate-900/50 p-6 rounded-xl" style="min-height: 400px;">
+                    <div class="mermaid" id="${diagramId}">${mermaidCode}</div>
                 </div>
             `;
+            
+            // Render Mermaid diagram
+            if (window.mermaid) {
+                window.mermaid.run({
+                    nodes: [document.getElementById(diagramId)]
+                }).then(() => {
+                    // Diagram rendered successfully
+                }).catch(err => {
+                    console.error('Mermaid rendering error:', err);
+                    // Fallback to simple text display
+                    diagram.innerHTML = `
+                        <div class="bg-slate-800 p-6 rounded-xl">
+                            <p class="text-red-400">Error rendering diagram. Please refresh the page.</p>
+                        </div>
+                    `;
+                });
+            } else {
+                // Mermaid not loaded yet, wait a bit and try again
+                setTimeout(() => {
+                    if (window.mermaid) {
+                        window.mermaid.run({
+                            nodes: [document.getElementById(diagramId)]
+                        });
+                    }
+                }, 500);
+            }
         }
 
         function renderModuleBreakdown() {
@@ -2642,12 +2956,12 @@
             const sortedModules = Object.entries(moduleCounts).sort((a, b) => b[1] - a[1]);
             const totalTrusts = TRUST_TYPES.length;
 
-            // Top 5 modules = MVP
-            const mvpModules = sortedModules.slice(0, 5).map(([module]) => module);
+            // Top 8 modules = MVP
+            const mvpModules = sortedModules.slice(0, 8).map(([module]) => module);
 
             // Calculate coverage at different module counts
             const coverageLevels = [
-                { name: 'MVP (Top 5 Modules)', count: 5, modules: mvpModules },
+                { name: 'MVP (Top 8 Modules)', count: 8, modules: mvpModules },
                 { name: 'Top 10 Modules', count: 10, modules: sortedModules.slice(0, 10).map(([m]) => m) },
                 { name: 'Top 15 Modules', count: 15, modules: sortedModules.slice(0, 15).map(([m]) => m) },
                 { name: 'All Modules', count: sortedModules.length, modules: sortedModules.map(([m]) => m) }
@@ -2673,10 +2987,48 @@
                        !trustModules.every(mod => mvpModules.includes(mod));
             });
 
+            // Calculate modules needed for 70%, 80%, and 90% coverage
+            function calculateCoverageAtModuleCount(moduleCount) {
+                const modules = sortedModules.slice(0, moduleCount).map(([m]) => m);
+                const coveredTrusts = TRUST_TYPES.filter(trust => {
+                    const trustModules = [];
+                    Object.values(trust.modules).forEach(moduleArray => {
+                        moduleArray.forEach(mod => trustModules.push(mod));
+                    });
+                    return trustModules.length > 0 && trustModules.every(mod => modules.includes(mod));
+                });
+                return {
+                    moduleCount,
+                    modules,
+                    coveredTrusts,
+                    coveragePercent: (coveredTrusts.length / totalTrusts) * 100
+                };
+            }
+
+            // Find minimum modules needed for each threshold (10% to 100% by tens)
+            const thresholdTargets = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+            const thresholdResults = {};
+            
+            for (let target of thresholdTargets) {
+                thresholdResults[target] = null;
+            }
+
+            for (let i = 1; i <= sortedModules.length; i++) {
+                const result = calculateCoverageAtModuleCount(i);
+                // Check each threshold that hasn't been found yet
+                for (let target of thresholdTargets) {
+                    if (!thresholdResults[target] && result.coveragePercent >= target) {
+                        thresholdResults[target] = result;
+                    }
+                }
+                // Stop if all thresholds found
+                if (Object.values(thresholdResults).every(r => r !== null)) break;
+            }
+
             container.innerHTML = `
                 <div class="bg-gradient-to-r from-blue-600/20 to-cyan-600/20 p-6 rounded-xl border border-blue-500/30 mb-6">
-                    <h4 class="text-lg font-bold text-white mb-4">🎯 MVP Definition: Top 5 Most-Used Modules</h4>
-                    <div class="grid md:grid-cols-5 gap-3 mb-4">
+                    <h4 class="text-lg font-bold text-white mb-4">🎯 MVP Definition: Top 8 Most-Used Modules</h4>
+                    <div class="grid md:grid-cols-4 lg:grid-cols-8 gap-3 mb-4">
                         ${mvpModules.map((module, idx) => {
                             const count = moduleCounts[module];
                             const percentage = ((count / totalTrusts) * 100).toFixed(0);
@@ -2722,17 +3074,17 @@
                             const coveragePercent = ((coveredTrusts.length / totalTrusts) * 100).toFixed(1);
                             
                             return `
-                                <div class="bg-slate-900/50 p-4 rounded-lg border-l-4 ${level.count === 5 ? 'border-cyan-500' : level.count === 10 ? 'border-blue-500' : level.count === 15 ? 'border-purple-500' : 'border-emerald-500'}">
+                                <div class="bg-slate-900/50 p-4 rounded-lg border-l-4 ${level.count === 8 ? 'border-cyan-500' : level.count === 10 ? 'border-blue-500' : level.count === 15 ? 'border-purple-500' : 'border-emerald-500'}">
                                     <div class="flex justify-between items-center mb-2">
                                         <h5 class="font-bold text-white">${level.name}</h5>
-                                        <span class="text-sm font-semibold ${level.count === 5 ? 'text-cyan-400' : level.count === 10 ? 'text-blue-400' : level.count === 15 ? 'text-purple-400' : 'text-emerald-400'}">
+                                        <span class="text-sm font-semibold ${level.count === 8 ? 'text-cyan-400' : level.count === 10 ? 'text-blue-400' : level.count === 15 ? 'text-purple-400' : 'text-emerald-400'}">
                                             ${coveragePercent}% Coverage
                                         </span>
                                     </div>
                                     <div class="text-sm text-slate-300 mb-2">
                                         <strong>${coveredTrusts.length}</strong> of <strong>${totalTrusts}</strong> trust types fully supported
                                     </div>
-                                    ${level.count === 5 ? `
+                                    ${level.count === 8 ? `
                                         <div class="mt-3 pt-3 border-t border-slate-700">
                                             <p class="text-xs font-semibold text-cyan-400 mb-2">Trust Types Covered by MVP:</p>
                                             <div class="flex flex-wrap gap-2">
@@ -2749,24 +3101,94 @@
                     </div>
                 </div>
 
+                <div class="bg-gradient-to-r from-emerald-600/20 to-teal-600/20 p-6 rounded-xl border border-emerald-500/30 mb-6">
+                    <h4 class="text-lg font-bold text-white mb-4">🎯 Coverage Threshold Analysis</h4>
+                    <p class="text-sm text-slate-300 mb-4">Minimum modules needed to achieve target coverage percentages (10% to 100% by tens):</p>
+                    <div class="space-y-6">
+                        ${thresholdTargets.map(target => {
+                            const result = thresholdResults[target];
+                            if (!result) return `
+                                <div class="bg-slate-800/50 p-4 rounded-lg border-l-4 border-slate-600">
+                                    <h5 class="font-bold text-white text-lg mb-2">${target}% Coverage Target</h5>
+                                    <p class="text-slate-400 text-sm">Not achievable with available modules</p>
+                                </div>
+                            `;
+                            
+                            // Color scheme based on threshold - using Tailwind-safe class names
+                            const colorClasses = {
+                                10: { border: 'border-emerald-500', text: 'text-emerald-400', textLight: 'text-emerald-300', bg: 'bg-emerald-500/20' },
+                                20: { border: 'border-green-500', text: 'text-green-400', textLight: 'text-green-300', bg: 'bg-green-500/20' },
+                                30: { border: 'border-teal-500', text: 'text-teal-400', textLight: 'text-teal-300', bg: 'bg-teal-500/20' },
+                                40: { border: 'border-cyan-500', text: 'text-cyan-400', textLight: 'text-cyan-300', bg: 'bg-cyan-500/20' },
+                                50: { border: 'border-sky-500', text: 'text-sky-400', textLight: 'text-sky-300', bg: 'bg-sky-500/20' },
+                                60: { border: 'border-blue-500', text: 'text-blue-400', textLight: 'text-blue-300', bg: 'bg-blue-500/20' },
+                                70: { border: 'border-indigo-500', text: 'text-indigo-400', textLight: 'text-indigo-300', bg: 'bg-indigo-500/20' },
+                                80: { border: 'border-violet-500', text: 'text-violet-400', textLight: 'text-violet-300', bg: 'bg-violet-500/20' },
+                                90: { border: 'border-purple-500', text: 'text-purple-400', textLight: 'text-purple-300', bg: 'bg-purple-500/20' },
+                                100: { border: 'border-pink-500', text: 'text-pink-400', textLight: 'text-pink-300', bg: 'bg-pink-500/20' }
+                            };
+                            const colors = colorClasses[target] || { border: 'border-slate-500', text: 'text-slate-400', textLight: 'text-slate-300', bg: 'bg-slate-500/20' };
+                            
+                            return `
+                                <div class="bg-slate-800/50 p-6 rounded-lg border-l-4 ${colors.border}">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <div>
+                                            <h5 class="font-bold text-white text-lg mb-1">${target}% Coverage Target</h5>
+                                            <p class="text-sm text-slate-400">Requires <strong class="${colors.text} text-xl">${result.moduleCount}</strong> modules</p>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-3xl font-bold ${colors.text}">${result.coveragePercent.toFixed(1)}%</div>
+                                            <div class="text-xs text-slate-400">Actual Coverage</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid md:grid-cols-2 gap-6">
+                                        <div>
+                                            <p class="text-sm font-semibold ${colors.textLight} mb-3">All Modules Required (${result.moduleCount}):</p>
+                                            <div class="bg-slate-900/50 p-3 rounded-lg max-h-60 overflow-y-auto">
+                                                <div class="flex flex-wrap gap-2">
+                                                    ${result.modules.map((m, idx) => 
+                                                        `<span class="px-2 py-1 ${colors.bg} ${colors.text} rounded text-xs border ${colors.border}">
+                                                            #${idx + 1} ${m}
+                                                        </span>`
+                                                    ).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm font-semibold ${colors.textLight} mb-3">Trust Types Covered (${result.coveredTrusts.length} of ${totalTrusts}):</p>
+                                            <div class="bg-slate-900/50 p-3 rounded-lg max-h-60 overflow-y-auto">
+                                                <div class="space-y-1">
+                                                    ${result.coveredTrusts.map(trust => 
+                                                        `<div class="text-xs text-slate-300 px-2 py-1 bg-slate-800/50 rounded">• ${trust.name}</div>`
+                                                    ).join('')}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+
                 <div class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 p-6 rounded-xl border border-purple-500/30">
                     <h4 class="text-lg font-bold text-white mb-4">💡 Strategic Insight</h4>
                     <div class="grid md:grid-cols-2 gap-4 text-sm">
                         <div>
-                            <p class="text-slate-300 mb-2"><strong class="text-purple-400">MVP Approach (Top 5):</strong></p>
+                            <p class="text-slate-300 mb-2"><strong class="text-purple-400">MVP Approach (Top 8):</strong></p>
                             <p class="text-slate-400 text-xs">
-                                Building just the top 5 most-used modules provides <strong class="text-white">${((mvpCoveredTrusts.length / totalTrusts) * 100).toFixed(0)}% full coverage</strong> 
+                                Building just the top 8 most-used modules provides <strong class="text-white">${((mvpCoveredTrusts.length / totalTrusts) * 100).toFixed(0)}% full coverage</strong> 
                                 of trust types, enabling rapid market entry with minimal development effort.
                             </p>
                         </div>
                         <div>
-                            <p class="text-slate-300 mb-2"><strong class="text-pink-400">Incremental Expansion:</strong></p>
+                            <p class="text-slate-300 mb-2"><strong class="text-pink-400">Coverage Milestones (10% increments):</strong></p>
                             <p class="text-slate-400 text-xs">
-                                Each additional module increases coverage. Top 10 modules cover <strong class="text-white">${((TRUST_TYPES.filter(t => {
-                                    const mods = [];
-                                    Object.values(t.modules).forEach(arr => arr.forEach(m => mods.push(m)));
-                                    return mods.length > 0 && mods.every(m => sortedModules.slice(0, 10).map(([m]) => m).includes(m));
-                                }).length / totalTrusts) * 100).toFixed(0)}%</strong> of trust types.
+                                ${thresholdTargets.map(target => {
+                                    const result = thresholdResults[target];
+                                    return result ? `${target}%: ${result.moduleCount} modules` : null;
+                                }).filter(Boolean).join(' • ')}
                             </p>
                         </div>
                     </div>
@@ -2776,6 +3198,7 @@
 
         // Event listeners
         document.addEventListener('DOMContentLoaded', () => {
+            populateTrustDropdown();
             populateModuleFilter();
             renderTrustTypes();
             renderModuleStats();
